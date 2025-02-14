@@ -10,12 +10,13 @@ namespace MG4G
         private Vector2 position;
         private Rectangle hitbox;
         private float velocityX = 4;
-        private float velocityY = 0;
+        private float velocityY = 4;
         private KeyboardState newState;
         private KeyboardState oldState;
         private Keys left;
         private Keys right;
         private Keys up;
+        private bool jump = false;
 
         public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up){
             this.texture = texture;
@@ -34,19 +35,22 @@ namespace MG4G
                 position.X += velocityX*1.1f;
             }
             if(newState.IsKeyDown(up) && oldState.IsKeyDown(up)){
-                Jump(gameTime);
+                jump = true;
             }
 
             hitbox.Location = position.ToPoint();
         }
 
         public void Jump(GameTime gameTime){
-            
+            if(jump){
+                
+            }
         }
 
         public void Update(GameTime gameTime){
             newState = Keyboard.GetState();
             Move(gameTime);
+            Jump(gameTime);
 
             oldState = newState;
         }
