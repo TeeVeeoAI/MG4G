@@ -18,7 +18,7 @@ public class Game1 : Game
         IsMouseVisible = true;
         _graphics.PreferredBackBufferHeight = 1080;
         _graphics.PreferredBackBufferWidth = 1920;
-        _graphics.IsFullScreen = true;
+        //_graphics.IsFullScreen = true;
     }
 
     protected override void Initialize()
@@ -33,15 +33,16 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         playerTexture = Content.Load<Texture2D>("images");
-        player1 = new Player(playerTexture, new Vector2(1080/2-50, 1920/2-150), Keys.A, Keys.D);
+        player1 = new Player(playerTexture, new Vector2(1080/2-50, 1080-200), Keys.A, Keys.D, Keys.Space);
 
         // TODO: use this.Content to load your game content here
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)){
             Exit();
+        }
 
         // TODO: Add your update logic here
 
