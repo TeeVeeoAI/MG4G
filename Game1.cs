@@ -10,6 +10,8 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private Texture2D playerTexture;
     private Player player1;
+    private Texture2D ballTexture;
+    private Ball ball;
 
     public Game1()
     {
@@ -32,8 +34,10 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+        ballTexture = Content.Load<Texture2D>("goat");
+
         playerTexture = Content.Load<Texture2D>("images");
-        player1 = new Player(playerTexture, new Vector2(1080/2-50, 1080-200), Keys.A, Keys.D, Keys.Space);
+        player1 = new Player(playerTexture, new Vector2(1080/2-200, 1080-550), Keys.A, Keys.D, Keys.Space);
 
         // TODO: use this.Content to load your game content here
     }

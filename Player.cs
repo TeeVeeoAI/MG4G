@@ -17,6 +17,7 @@ namespace MG4G
         private Keys right;
         private Keys up;
         private bool jump = false;
+        private Vector2 prevPos;
 
         public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up){
             this.texture = texture;
@@ -24,18 +25,19 @@ namespace MG4G
             this.left = left;
             this.right = right;
             this.up = up;
-            hitbox = new Rectangle((int)position.X, (int)position.Y, 50, 150);
+            hitbox = new Rectangle((int)position.X, (int)position.Y, 200, 500);
         }
 
         public void Move(GameTime gameTime){
             if(newState.IsKeyDown(left) && position.X >= 0){
                 position.X -= velocityX*1.1f;
             }
-            if(newState.IsKeyDown(right) && position.X <= 1920-50){
+            if(newState.IsKeyDown(right) && position.X <= 1920-200){
                 position.X += velocityX*1.1f;
             }
-            if(newState.IsKeyDown(up) && oldState.IsKeyDown(up)){
+            if(newState.IsKeyDown(up) && oldState.IsKeyDown(up) && !jump){
                 jump = true;
+                prevPos = position;
             }
 
             hitbox.Location = position.ToPoint();
@@ -43,7 +45,15 @@ namespace MG4G
 
         public void Jump(GameTime gameTime){
             if(jump){
-                
+                if(position.Y <= prevPos.Y - 300){
+                    velocityY = velocityY*-1;
+                }
+
+                position.Y -= velocityY*1.1f;
+            }
+            if (position.Y >= prevPos.Y){
+                velocityY = velocityY*-1;
+                jump = false;
             }
         }
 

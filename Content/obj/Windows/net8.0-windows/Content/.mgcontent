@@ -4,9 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/goat.png</File>
     <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/images.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
