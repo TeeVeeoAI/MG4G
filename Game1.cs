@@ -10,8 +10,11 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private Texture2D playerTexture;
     private Player player1;
+    private Player player2;
     private Texture2D ballTexture;
     private Ball ball;
+    private bool shoot;
+    private float lastShoot;
 
     public Game1()
     {
@@ -37,7 +40,12 @@ public class Game1 : Game
         ballTexture = Content.Load<Texture2D>("goat");
 
         playerTexture = Content.Load<Texture2D>("images");
-        player1 = new Player(playerTexture, new Vector2(1080/2-200, 1080-550), Keys.A, Keys.D, Keys.Space);
+        shoot = false;
+        ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
+        player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.R, ball);
+        player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.Down, ball);
+        ball.Player1 = player1;
+        ball.Player2 = player2;
 
         // TODO: use this.Content to load your game content here
     }
@@ -51,7 +59,21 @@ public class Game1 : Game
         // TODO: Add your update logic here
 
         player1.Update(gameTime);
-
+        player2.Update(gameTime);
+        ball.Update(gameTime);
+        if(ball.Hitbox.Intersects(player1.Hitbox) && !shoot){
+            lastShoot = gameTime.TotalGameTime.Seconds;
+            player1.HasBall = true;
+            shoot = true;
+        } else if(ball.Hitbox.Intersects(player2.Hitbox) && !shoot){
+            lastShoot = gameTime.TotalGameTime.Seconds;
+            player2.HasBall = true;
+            shoot = true;
+        }
+        if(gameTime.TotalGameTime.Seconds >= lastShoot+3f){
+            shoot = false;
+        }
+        
         base.Update(gameTime);
     }
 
@@ -63,6 +85,8 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         player1.Draw(_spriteBatch);
+        player2.Draw(_spriteBatch);
+        ball.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);

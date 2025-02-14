@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.MediaFoundation;
 
 namespace MG4G
 {
@@ -8,5 +9,80 @@ namespace MG4G
         private Texture2D texture;
         private Vector2 position;
         private Rectangle hitbox;
+        private float velocityX;
+        private float velocityY;
+        private float rotationAngle;
+        private Player player1;
+        private Player player2;
+
+        public Player Player1{
+            set{ player1 = value; }
+        }
+        public Player Player2{
+            set{ player2 = value; }
+        }
+
+        public Rectangle Hitbox{
+            get{ return hitbox; }
+        }
+        public float VelocityX{
+            get{ return velocityX; }
+            set{ velocityX = value; }
+        }
+        public float VelocityY{
+            get{ return velocityY; }
+            set{ velocityY = value; }
+        }
+
+        public Ball(Texture2D texture, Vector2 position){
+            this.texture = texture;
+            this.position = position;
+
+            hitbox = new Rectangle((int)position.X, (int)position.Y, 50, 50);
+
+            velocityX = 4;
+            velocityY = 4;
+        }
+
+        public Player WhoHasTheBall(GameTime gameTime){
+            Player player = null;
+            if (player1.HasBall){
+                position.X = player1.Position.X+100f-25f;
+                position.Y = player1.Position.Y+150f-10f;
+                player = player1;
+            }
+            else if (player2.HasBall){
+                position.X = player2.Position.X+100f-25f;
+                position.Y = player2.Position.Y+150f-10f;
+                player = player2;
+            }
+
+            return player;
+        }
+
+        public void SpinTheBall(GameTime gameTime){
+            rotationAngle += (float)gameTime.ElapsedGameTime.TotalSeconds * 5f;
+            float circle = MathHelper.Pi * 2;
+            rotationAngle %= circle;
+        }
+
+        public void Move(GameTime gameTime){
+            position.X += velocityX;
+            //position.Y -= velocityY;
+
+        }
+
+        public void Update(GameTime gameTime){
+            SpinTheBall(gameTime);
+            if (WhoHasTheBall(gameTime) == null){
+                Move(gameTime);
+            }
+            
+            hitbox.Location = position.ToPoint();
+        }
+
+        public void Draw(SpriteBatch spriteBatch){
+            spriteBatch.Draw(texture, hitbox, null, Color.White, rotationAngle, new Vector2(texture.Width/2, texture.Height/2), SpriteEffects.None, 0f);
+        }
     }
 }
