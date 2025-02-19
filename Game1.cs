@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Microsoft.Xna.Framework.Input;
 
 namespace MG4G;
@@ -22,7 +23,7 @@ public class Game1 : Game
         IsMouseVisible = true;
         _graphics.PreferredBackBufferHeight = 1080;
         _graphics.PreferredBackBufferWidth = 1920;
-        //_graphics.IsFullScreen = true;
+        //_graphics.IsFullScreen = false;
     }
 
     protected override void Initialize()
@@ -54,6 +55,8 @@ public class Game1 : Game
             Exit();
         }
 
+
+
         // TODO: Add your update logic here
 
         player1.Update(gameTime);
@@ -78,7 +81,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(new Color(20,15,30));
 
         // TODO: Add your drawing code here
 
