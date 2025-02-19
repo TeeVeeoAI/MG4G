@@ -68,7 +68,44 @@ namespace MG4G
 
         public void Move(GameTime gameTime){
             position.X += velocityX;
-            //position.Y -= velocityY;
+            position.Y -= velocityY;
+
+            if(position.Y <= 0+(hitbox.Height/2) || position.Y >= 1080-(hitbox.Height/2)-50){
+                velocityY = velocityY*-1;
+            }
+
+            if(position.X <= 0+(hitbox.Width/2) || position.X >= 1920-(hitbox.Width/2)){
+                velocityX = velocityX*-1;
+            }
+
+
+            // Y Shit
+
+            else if(position.Y <= 1080/3+(hitbox.Height/2)){
+                if (velocityY <= 0){
+                   velocityY = -0.5f; 
+                }
+                else{
+                   velocityY = 0.5f; 
+                }
+                
+            }
+            else if(position.Y <= (1080/3)*2+(hitbox.Height/2)){
+                if (velocityY <= 0){
+                   velocityY = -2; 
+                }
+                else{
+                   velocityY = 2; 
+                }
+            }
+            else if(position.Y <= 1080+(hitbox.Height/2)){
+                if (velocityY <= 0){
+                   velocityY = -4; 
+                }
+                else{
+                   velocityY = 4; 
+                }
+            }
 
         }
 

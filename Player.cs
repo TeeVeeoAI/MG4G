@@ -34,6 +34,7 @@ namespace MG4G
         //Ball
         private Ball ball;
         private bool hasBall;
+        private bool shootB;
 
 
         public Rectangle Hitbox{
@@ -45,6 +46,11 @@ namespace MG4G
         public bool HasBall{
             get{ return hasBall; }
             set{ hasBall = value; }
+        }
+
+        public bool ShootB{
+            get{ return shootB; }
+            set{ shootB = value; }
         }
 
         public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up, Keys shoot, Ball ball){
@@ -63,6 +69,7 @@ namespace MG4G
             jump = false;
             velocityX = 4;
             velocityY = 4;
+            shootB = false;
         }
 
         public void Move(GameTime gameTime){
@@ -101,6 +108,7 @@ namespace MG4G
 
         public void Shoot(GameTime gameTime){
             ball.VelocityX = ball.VelocityX*-1;
+            ball.VelocityY = 4;
             hasBall = false;
         }
 

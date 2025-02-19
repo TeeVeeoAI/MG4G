@@ -13,7 +13,6 @@ public class Game1 : Game
     private Player player2;
     private Texture2D ballTexture;
     private Ball ball;
-    private bool shoot;
     private float lastShoot;
 
     public Game1()
@@ -40,7 +39,6 @@ public class Game1 : Game
         ballTexture = Content.Load<Texture2D>("goat");
 
         playerTexture = Content.Load<Texture2D>("images");
-        shoot = false;
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
         player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.R, ball);
         player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.Down, ball);
@@ -61,17 +59,18 @@ public class Game1 : Game
         player1.Update(gameTime);
         player2.Update(gameTime);
         ball.Update(gameTime);
-        if(ball.Hitbox.Intersects(player1.Hitbox) && !shoot){
+        if(ball.Hitbox.Intersects(player1.Hitbox) && !player1.ShootB){
             lastShoot = gameTime.TotalGameTime.Seconds;
             player1.HasBall = true;
-            shoot = true;
-        } else if(ball.Hitbox.Intersects(player2.Hitbox) && !shoot){
+            player1.ShootB = true;
+        } else if(ball.Hitbox.Intersects(player2.Hitbox) && !player2.ShootB){
             lastShoot = gameTime.TotalGameTime.Seconds;
             player2.HasBall = true;
-            shoot = true;
+            player2.ShootB = true;
         }
-        if(gameTime.TotalGameTime.Seconds >= lastShoot+3f){
-            shoot = false;
+        if(gameTime.TotalGameTime.Seconds >= lastShoot+3.5f){
+            player2.ShootB = false;
+            player1.ShootB = false;
         }
         
         base.Update(gameTime);
