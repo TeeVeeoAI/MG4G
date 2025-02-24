@@ -81,7 +81,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(new Color(20,15,30));
+        GraphicsDevice.Clear(new Color(150,200,175));
 
         // TODO: Add your drawing code here
 
