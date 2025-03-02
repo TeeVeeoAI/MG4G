@@ -56,3 +56,6 @@ C:\Users\tores\OneDrive\Documents\GitHub\MG4G\obj\Debug\net8.0-windows\refint\MG
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\obj\Debug\net8.0-windows\MG4G.pdb
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\obj\Debug\net8.0-windows\MG4G.genruntimeconfig.cache
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\obj\Debug\net8.0-windows\ref\MG4G.dll
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoppRight.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoopLeft.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoopRight.xnb

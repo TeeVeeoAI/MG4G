@@ -5,9 +5,15 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/tores/OneDrive/Documents/GitHub/MG4G/Content/goat.png</File>
+    <File>C:/Users/tores/OneDrive/Documents/GitHub/MG4G/Content/hoopLeft.png</File>
+    <File>C:/Users/tores/OneDrive/Documents/GitHub/MG4G/Content/hoopRight.png</File>
+    <File>C:/Users/tores/OneDrive/Documents/GitHub/MG4G/Content/hoppRight.png</File>
     <File>C:/Users/tores/OneDrive/Documents/GitHub/MG4G/Content/images.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

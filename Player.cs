@@ -29,6 +29,8 @@ namespace MG4G
         private bool jump;
         private Vector2 prevPos;
         private bool hitTop;
+        private float jumpStartTime;
+        int jumpHeight;
 
 
         //Ball
@@ -67,42 +69,70 @@ namespace MG4G
             hitTop = false;
             hasBall = false;
             jump = false;
-            velocityX = 4;
-            velocityY = 4;
             shootB = false;
+            jumpHeight = 300;
         }
 
         public void Move(GameTime gameTime){
-            if(newState.IsKeyDown(left) && position.X >= 0){
-                position.X -= velocityX*1.1f;
+
+            //Move.Left
+            if(newState.IsKeyDown(left) && position.X >= 0 && !jump){
+                velocityX = -4;
             }
-            if(newState.IsKeyDown(right) && position.X <= 1920-hitbox.Width){
-                position.X += velocityX*1.1f;
+            
+            //Move.Right
+            if(newState.IsKeyDown(right) && position.X <= 1920-hitbox.Width && !jump){
+                velocityX = 4;
             }
+            
+            //Move.Stop
+            if(((newState.IsKeyUp(left) && oldState.IsKeyDown(left) && position.X >= 0) || (newState.IsKeyUp(right) && oldState.IsKeyDown(right) && position.X <= 1920-hitbox.Width)) && !jump){
+                velocityX = 0;
+            }
+
+            //Move.Up
             if(newState.IsKeyDown(up) && oldState.IsKeyUp(up) && !jump){
                 jump = true;
                 prevPos = position;
+                jumpStartTime = gameTime.TotalGameTime.Seconds;
             }
+
+            //Shoot
             if(newState.IsKeyDown(shoot) && oldState.IsKeyUp(shoot) && hasBall){
                 Shoot(gameTime);
             }
+
+            position.X += velocityX*1.1f;
 
             hitbox.Location = position.ToPoint();
         }
 
         public void Jump(GameTime gameTime){
             if(jump){
-                if(position.Y <= prevPos.Y - 300){
-                    velocityY = velocityY*-1;
+                float velocityXB = velocityX;
+
+                velocityY = jumpHeight*3/100-1 - (gameTime.TotalGameTime.Seconds - jumpStartTime);
+                velocityX = velocityXB * 0.99f;
+                if (position.X >= 1920-hitbox.Width || position.X <= 0){
+                    velocityX = 0;
+                }
+                
+                if(position.Y <= prevPos.Y - jumpHeight){
                     hitTop = true;
+                }
+
+                if(hitTop){
+                    velocityY = velocityY*-1;
                 }
 
                 position.Y -= velocityY*1.1f;
             }
+            
             if (position.Y > 1080-hitbox.Height-50 && hitTop){
-                velocityY = velocityY*-1;
+                velocityY = 0;
                 jump = false;
                 hitTop = false;
+                velocityX = 0;
             }
         }
 
