@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.XAudio2;
 
 namespace MG4G;
 
@@ -16,8 +15,9 @@ public class Game1 : Game
     private Ball ball;
     private Texture2D hoopTextureRight, hoopTextureLeft;
     private Hoop hoopLeft, hoopRight;
-    
+    private SpriteFont font;
     private float lastShoot;
+    private Score score;
 
     public Game1()
     {
@@ -44,6 +44,7 @@ public class Game1 : Game
         playerTexture = Content.Load<Texture2D>("images");
         hoopTextureRight = Content.Load<Texture2D>("hoopRight");
         hoopTextureLeft = Content.Load<Texture2D>("hoopLeft");
+        font = Content.Load<SpriteFont>("File");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
         player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.R, ball);
@@ -52,6 +53,7 @@ public class Game1 : Game
         ball.Player2 = player2; 
         hoopLeft = new Hoop(hoopTextureLeft, new Vector2(0, 1080 - 150/*hoop height/width*/ - 400/*the hoop height*/));
         hoopRight = new Hoop(hoopTextureRight, new Vector2(1920 - 150/*hoop height/width*/, 1080 - 150/*hoop height/width*/ - 400/*the hoop height*/));
+        score = new Score(new Vector2(1920/2-50, 0), font);
 
         // TODO: use this.Content to load your game content here
     }
@@ -69,19 +71,23 @@ public class Game1 : Game
         player1.Update(gameTime);
         player2.Update(gameTime);
         ball.Update(gameTime);
-        if(ball.Hitbox.Intersects(player1.Hitbox) && !player1.ShootB){
+
+        if(ball.Hitbox.Intersects(player1.Hitbox) && !player1.ShootB && !player2.HasBall){
             lastShoot = gameTime.TotalGameTime.Seconds;
             player1.HasBall = true;
             player1.ShootB = true;
-        } else if(ball.Hitbox.Intersects(player2.Hitbox) && !player2.ShootB){
+        } else if(ball.Hitbox.Intersects(player2.Hitbox) && !player2.ShootB && !player1.HasBall){
             lastShoot = gameTime.TotalGameTime.Seconds;
             player2.HasBall = true;
             player2.ShootB = true;
         }
+
         if(gameTime.TotalGameTime.Seconds >= lastShoot+3.5f){
             player2.ShootB = false;
             player1.ShootB = false;
         }
+
+        Dunk(gameTime);
         
         base.Update(gameTime);
     }
@@ -98,22 +104,26 @@ public class Game1 : Game
         player1.Draw(_spriteBatch);
         player2.Draw(_spriteBatch);
         ball.Draw(_spriteBatch);
+        score.DrawScore(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);
     }
 
-    public Player Dunk(GameTime gameTime){
+    public void Dunk(GameTime gameTime){
 
         Player player = ball.WhoHasTheBall(gameTime);
 
-        if(player.Hitbox.Intersects(hoopLeft.Hitbox)){
-
+        //left dunk
+        if(player != null && player.Hitbox.Intersects(hoopLeft.Hitbox)){
+            player.HasBall = false;
+            score.UpdateScore(score.LeftScore + 2, score.RightScore, gameTime);
         }
 
-
-
-
-        return player;
+        //right dunk
+        if(player != null && player.Hitbox.Intersects(hoopRight.Hitbox)){
+            player.HasBall = false;
+            score.UpdateScore(score.LeftScore, score.RightScore + 2, gameTime);
+        }
     }
 }

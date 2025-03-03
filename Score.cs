@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.DirectoryServices.ActiveDirectory;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MG4G
 {
@@ -10,6 +8,8 @@ namespace MG4G
     {
         private int leftScore;
         private int rightScore;
+        private Vector2 position;
+        private SpriteFont font;
 
         public int LeftScore{
             get{ return leftScore; }
@@ -23,14 +23,20 @@ namespace MG4G
             public int RightScore{ get => rightScore; set => rightScore = value; }
         */
 
-        public Score(int leftScore, int rightScore){
-            this.leftScore = leftScore;
-            this.rightScore = rightScore;
+        public Score(Vector2 position, SpriteFont font){
+            leftScore = 0;
+            rightScore = 0;
+            this.position = position;
+            this.font = font;
         }
 
         public void UpdateScore(int leftScore, int rightScore, GameTime gameTime){
             this.leftScore = leftScore;
             this.rightScore = rightScore;
+        }
+
+        public void DrawScore(SpriteBatch spriteBatch){
+            spriteBatch.DrawString(font, leftScore + " : " + rightScore, position, Color.Black);
         }
     }
 }

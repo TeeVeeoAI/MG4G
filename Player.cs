@@ -142,6 +142,10 @@ namespace MG4G
             hasBall = false;
         }
 
+        public void Dunk(GameTime gameTime){
+            hasBall = false;
+        }
+
         public void Update(GameTime gameTime){
             newState = Keyboard.GetState();
             Move(gameTime);

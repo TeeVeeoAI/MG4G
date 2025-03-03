@@ -59,3 +59,4 @@ C:\Users\tores\OneDrive\Documents\GitHub\MG4G\obj\Debug\net8.0-windows\ref\MG4G.
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoppRight.xnb
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoopLeft.xnb
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoopRight.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\File.xnb
