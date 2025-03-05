@@ -33,6 +33,9 @@ namespace MG4G
             get{ return velocityY; }
             set{ velocityY = value; }
         }
+        public Vector2 Position{
+            get{ return position; }
+        }
 
         public Ball(Texture2D texture, Vector2 position){
             this.texture = texture;
@@ -77,36 +80,6 @@ namespace MG4G
             if(position.X <= 0+(hitbox.Width/2) || position.X >= 1920-(hitbox.Width/2)){
                 velocityX = velocityX*-1;
             }
-
-
-            // Y Shit
-
-            else if(position.Y <= 1080/3+(hitbox.Height/2)){
-                if (velocityY <= 0){
-                   velocityY = -0.5f; 
-                }
-                else{
-                   velocityY = 0.5f; 
-                }
-                
-            }
-            else if(position.Y <= (1080/3)*2+(hitbox.Height/2)){
-                if (velocityY <= 0){
-                   velocityY = -2; 
-                }
-                else{
-                   velocityY = 2; 
-                }
-            }
-            else if(position.Y <= 1080+(hitbox.Height/2)){
-                if (velocityY <= 0){
-                   velocityY = -4; 
-                }
-                else{
-                   velocityY = 4; 
-                }
-            }
-
         }
 
         public void Update(GameTime gameTime){

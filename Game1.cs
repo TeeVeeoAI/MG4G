@@ -18,6 +18,7 @@ public class Game1 : Game
     private SpriteFont font;
     private float lastShoot;
     private Score score;
+    private Player lastToHaveBall;
 
     public Game1()
     {
@@ -47,8 +48,8 @@ public class Game1 : Game
         font = Content.Load<SpriteFont>("File");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
-        player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.R, ball);
-        player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.Down, ball);
+        player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, ball);
+        player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.NumPad6, Keys.NumPad4, ball);
         ball.Player1 = player1;
         ball.Player2 = player2; 
         hoopLeft = new Hoop(hoopTextureLeft, new Vector2(0, 1080 - 150/*hoop height/width*/ - 400/*the hoop height*/));
@@ -87,6 +88,12 @@ public class Game1 : Game
             player1.ShootB = false;
         }
 
+        if(player1.HasBall){
+            lastToHaveBall = player1;
+        } else{
+            lastToHaveBall = player2;
+        }
+
         Dunk(gameTime);
         
         base.Update(gameTime);
@@ -115,15 +122,15 @@ public class Game1 : Game
         Player player = ball.WhoHasTheBall(gameTime);
 
         //left dunk
-        if(player != null && player.Hitbox.Intersects(hoopLeft.Hitbox)){
+        if(player != null && player.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.Y <= hoopLeft.Position.Y){
             player.HasBall = false;
-            score.UpdateScore(score.LeftScore + 2, score.RightScore, gameTime);
+            score.UpdateScore(2, 0, gameTime);
         }
 
         //right dunk
-        if(player != null && player.Hitbox.Intersects(hoopRight.Hitbox)){
+        if(player != null && player.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.Y <= hoopRight.Position.Y){
             player.HasBall = false;
-            score.UpdateScore(score.LeftScore, score.RightScore + 2, gameTime);
+            score.UpdateScore(0, 2, gameTime);
         }
     }
 }

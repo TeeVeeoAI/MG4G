@@ -30,9 +30,9 @@ namespace MG4G
             this.font = font;
         }
 
-        public void UpdateScore(int leftScore, int rightScore, GameTime gameTime){
-            this.leftScore = leftScore;
-            this.rightScore = rightScore;
+        public void UpdateScore(int leftScoreAdd, int rightScoreAdd, GameTime gameTime){
+            leftScore += leftScoreAdd;
+            rightScore += rightScoreAdd;
         }
 
         public void DrawScore(SpriteBatch spriteBatch){

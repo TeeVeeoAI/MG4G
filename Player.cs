@@ -22,7 +22,8 @@ namespace MG4G
         private Keys left;
         private Keys right;
         private Keys up;
-        private Keys shoot;
+        private Keys shootL;
+        private Keys shootR;
 
 
         //Jump
@@ -55,13 +56,14 @@ namespace MG4G
             set{ shootB = value; }
         }
 
-        public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up, Keys shoot, Ball ball){
+        public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up, Keys shootL, Keys shootR, Ball ball){
             this.texture = texture;
             this.position = position;
             this.left = left;
             this.right = right;
             this.up = up;
-            this.shoot = shoot;
+            this.shootL = shootL;
+            this.shootR = shootR;
             this.ball = ball;
 
             hitbox = new Rectangle((int)position.X, (int)position.Y, 100, 300);
@@ -70,7 +72,7 @@ namespace MG4G
             hasBall = false;
             jump = false;
             shootB = false;
-            jumpHeight = 300;
+            jumpHeight = 400;
         }
 
         public void Move(GameTime gameTime){
@@ -83,6 +85,10 @@ namespace MG4G
             //Move.Right
             if(newState.IsKeyDown(right) && position.X <= 1920-hitbox.Width && !jump){
                 velocityX = 4;
+            }
+
+            if (newState.IsKeyDown(left) && newState.IsKeyDown(right)){
+                velocityX = 0;
             }
             
             //Move.Stop
@@ -98,7 +104,12 @@ namespace MG4G
             }
 
             //Shoot
-            if(newState.IsKeyDown(shoot) && oldState.IsKeyUp(shoot) && hasBall){
+            if(newState.IsKeyDown(shootL) && oldState.IsKeyUp(shootL) && hasBall){
+                ball.VelocityX = 4;
+                Shoot(gameTime);
+            }
+            if(newState.IsKeyDown(shootR) && oldState.IsKeyUp(shootR) && hasBall){
+                ball.VelocityX = -4;
                 Shoot(gameTime);
             }
 
@@ -110,9 +121,14 @@ namespace MG4G
         public void Jump(GameTime gameTime){
             if(jump){
                 float velocityXB = velocityX;
+                float bVelocityY = 4;
 
                 velocityY = jumpHeight*3/100-1 - (gameTime.TotalGameTime.Seconds - jumpStartTime);
                 velocityX = velocityXB * 0.99f;
+
+                if (hasBall)
+                    ball.VelocityY = bVelocityY + velocityY/2;
+
                 if (position.X >= 1920-hitbox.Width || position.X <= 0){
                     velocityX = 0;
                 }
@@ -123,6 +139,8 @@ namespace MG4G
 
                 if(hitTop){
                     velocityY = velocityY*-1;
+                    if (hasBall)
+                        ball.VelocityY = bVelocityY - velocityY/2;
                 }
 
                 position.Y -= velocityY*1.1f;
@@ -133,12 +151,13 @@ namespace MG4G
                 jump = false;
                 hitTop = false;
                 velocityX = 0;
+                ball.VelocityY = 4;
             }
         }
 
         public void Shoot(GameTime gameTime){
-            ball.VelocityX = ball.VelocityX*-1;
-            ball.VelocityY = 4;
+            ball.VelocityX = ball.VelocityX;
+            ball.VelocityY = ball.VelocityY;
             hasBall = false;
         }
 
