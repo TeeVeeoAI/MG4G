@@ -1,3 +1,4 @@
+using System.Security;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,8 +13,7 @@ namespace MG4G
         private Texture2D texture;
         private Vector2 position;
         private Rectangle hitbox;
-        private float velocityX;
-        private float velocityY;
+        private Vector2 velocity;
 
 
         //keyS and keyboardS
@@ -40,21 +40,10 @@ namespace MG4G
         private bool shootB;
 
 
-        public Rectangle Hitbox{
-            get{ return hitbox; }
-        }
-        public Vector2 Position{
-            get{ return position; }
-        }
-        public bool HasBall{
-            get{ return hasBall; }
-            set{ hasBall = value; }
-        }
-
-        public bool ShootB{
-            get{ return shootB; }
-            set{ shootB = value; }
-        }
+        public Rectangle Hitbox{ get => hitbox; }
+        public Vector2 Position{ get => position; }
+        public bool HasBall{ get => hasBall; set => hasBall = value; }
+        public bool ShootB{ get =>shootB; set => shootB = value; }
 
         public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up, Keys shootL, Keys shootR, Ball ball){
             this.texture = texture;
@@ -79,21 +68,21 @@ namespace MG4G
 
             //Move.Left
             if(newState.IsKeyDown(left) && position.X >= 0 && !jump){
-                velocityX = -4;
+                velocity.X = -4;
             }
             
             //Move.Right
             if(newState.IsKeyDown(right) && position.X <= 1920-hitbox.Width && !jump){
-                velocityX = 4;
+                velocity.X = 4;
             }
 
             if (newState.IsKeyDown(left) && newState.IsKeyDown(right)){
-                velocityX = 0;
+                velocity.X = 0;
             }
             
             //Move.Stop
             if(((newState.IsKeyUp(left) && oldState.IsKeyDown(left) && position.X >= 0) || (newState.IsKeyUp(right) && oldState.IsKeyDown(right) && position.X <= 1920-hitbox.Width)) && !jump){
-                velocityX = 0;
+                velocity.X = 0;
             }
 
             //Move.Up
@@ -113,24 +102,24 @@ namespace MG4G
                 Shoot(gameTime);
             }
 
-            position.X += velocityX*1.1f;
+            position.X += velocity.X*1.1f;
 
             hitbox.Location = position.ToPoint();
         }
 
         public void Jump(GameTime gameTime){
             if(jump){
-                float velocityXB = velocityX;
+                float velocityXB = velocity.X;
                 float bVelocityY = 4;
 
-                velocityY = jumpHeight*3/100-1 - (gameTime.TotalGameTime.Seconds - jumpStartTime);
-                velocityX = velocityXB * 0.99f;
+                velocity.Y = jumpHeight*3/100-1 - (gameTime.TotalGameTime.Seconds - jumpStartTime);
+                velocity.X = velocityXB * 0.99f;
 
                 if (hasBall)
-                    ball.VelocityY = bVelocityY + velocityY/2;
+                    ball.VelocityY = bVelocityY + velocity.Y/2;
 
                 if (position.X >= 1920-hitbox.Width || position.X <= 0){
-                    velocityX = 0;
+                    velocity.X = 0;
                 }
                 
                 if(position.Y <= prevPos.Y - jumpHeight){
@@ -138,19 +127,19 @@ namespace MG4G
                 }
 
                 if(hitTop){
-                    velocityY = velocityY*-1;
+                    velocity.Y = velocity.Y*-1;
                     if (hasBall)
-                        ball.VelocityY = bVelocityY - velocityY/2;
+                        ball.VelocityY = bVelocityY - velocity.Y/2;
                 }
 
-                position.Y -= velocityY*1.1f;
+                position.Y -= velocity.Y*1.1f;
             }
             
             if (position.Y > 1080-hitbox.Height-50 && hitTop){
-                velocityY = 0;
+                velocity.Y = 0;
                 jump = false;
                 hitTop = false;
-                velocityX = 0;
+                velocity.X = 0;
                 ball.VelocityY = 4;
             }
         }

@@ -9,33 +9,18 @@ namespace MG4G
         private Texture2D texture;
         private Vector2 position;
         private Rectangle hitbox;
-        private float velocityX;
-        private float velocityY;
+        private Vector2 velocity;
         private float rotationAngle;
         private Player player1;
         private Player player2;
 
-        public Player Player1{
-            set{ player1 = value; }
-        }
-        public Player Player2{
-            set{ player2 = value; }
-        }
-
-        public Rectangle Hitbox{
-            get{ return hitbox; }
-        }
-        public float VelocityX{
-            get{ return velocityX; }
-            set{ velocityX = value; }
-        }
-        public float VelocityY{
-            get{ return velocityY; }
-            set{ velocityY = value; }
-        }
-        public Vector2 Position{
-            get{ return position; }
-        }
+        public Player Player1{ set => player1 = value; }
+        public Player Player2{ set => player2 = value; }
+        public Rectangle Hitbox{ get => hitbox; }
+        public Vector2 Velocity{ get => velocity; }
+        public float VelocityX{ get => velocity.X; set => velocity.X = value; }
+        public float VelocityY{ get => velocity.Y; set => velocity.Y = value; }
+        public Vector2 Position{ get => position; }
 
         public Ball(Texture2D texture, Vector2 position){
             this.texture = texture;
@@ -43,8 +28,8 @@ namespace MG4G
 
             hitbox = new Rectangle((int)position.X, (int)position.Y, 50, 50);
 
-            velocityX = 4;
-            velocityY = 4;
+            velocity.X = 4;
+            velocity.Y = 4;
         }
 
         public Player WhoHasTheBall(GameTime gameTime){
@@ -70,15 +55,15 @@ namespace MG4G
         }
 
         public void Move(GameTime gameTime){
-            position.X += velocityX;
-            position.Y -= velocityY;
+            position.X += velocity.X;
+            position.Y -= velocity.Y;
 
             if(position.Y <= 0+(hitbox.Height/2) || position.Y >= 1080-(hitbox.Height/2)-50){
-                velocityY = velocityY*-1;
+                velocity.Y = velocity.Y*-1;
             }
 
             if(position.X <= 0+(hitbox.Width/2) || position.X >= 1920-(hitbox.Width/2)){
-                velocityX = velocityX*-1;
+                velocity.X = velocity.X*-1;
             }
         }
 

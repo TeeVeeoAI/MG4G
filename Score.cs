@@ -11,17 +11,8 @@ namespace MG4G
         private Vector2 position;
         private SpriteFont font;
 
-        public int LeftScore{
-            get{ return leftScore; }
-        }
-        public int RightScore{
-            get{ return rightScore; }
-        }
-
-        //fråga tim om
-        /*
-            public int RightScore{ get => rightScore; set => rightScore = value; }
-        */
+        public int LeftScore{ get => leftScore; }
+        public int RightScore{ get => rightScore; }
 
         public Score(Vector2 position, SpriteFont font){
             leftScore = 0;
