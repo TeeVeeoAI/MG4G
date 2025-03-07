@@ -14,6 +14,7 @@ namespace MG4G
         private Vector2 position;
         private Rectangle hitbox;
         private Vector2 velocity;
+        private SpriteEffects spriteEffects;
 
 
         //keyS and keyboardS
@@ -81,7 +82,13 @@ namespace MG4G
             }
             
             //Move.Stop
-            if(((newState.IsKeyUp(left) && oldState.IsKeyDown(left) && position.X >= 0) || (newState.IsKeyUp(right) && oldState.IsKeyDown(right) && position.X <= 1920-hitbox.Width)) && !jump){
+            if(((newState.IsKeyUp(left) && oldState.IsKeyDown(left) && position.X >= 0)
+                || (newState.IsKeyUp(right) && oldState.IsKeyDown(right) && position.X <= 1920-hitbox.Width)) && !jump){
+                velocity.X = 0;
+            }
+
+            if(position.X <= 0 || position.X >= 1920-hitbox.Width){
+                position.X += velocity.X*2;
                 velocity.X = 0;
             }
 
@@ -140,7 +147,8 @@ namespace MG4G
                 jump = false;
                 hitTop = false;
                 velocity.X = 0;
-                ball.VelocityY = 4;
+                if (hasBall)
+                    ball.VelocityY = 4;
             }
         }
 
@@ -158,12 +166,17 @@ namespace MG4G
             newState = Keyboard.GetState();
             Move(gameTime);
             Jump(gameTime);
+            if (velocity.X > 0){
+                spriteEffects = SpriteEffects.None;
+            } else if (velocity.X < 0){
+                spriteEffects = SpriteEffects.FlipHorizontally;
+            }
 
             oldState = newState;
         }
 
         public void Draw(SpriteBatch spriteBatch){
-            spriteBatch.Draw(texture, hitbox, Color.White);
+            spriteBatch.Draw(texture, hitbox, null, Color.White, 0, new Vector2(0, 0), spriteEffects, 0);
         }
     }
 }

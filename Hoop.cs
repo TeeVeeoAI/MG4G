@@ -23,10 +23,7 @@ namespace MG4G
             set{ position = value; }
         }
 
-        public Rectangle Hitbox{
-            get{ return hitbox; }
-            set{ hitbox = value; }
-        }
+        public Rectangle Hitbox{ get => hitbox; set => hitbox = value; }
 
         public Hoop(Texture2D texture, Vector2 position){
             this.texture = texture;

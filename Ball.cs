@@ -58,11 +58,11 @@ namespace MG4G
             position.X += velocity.X;
             position.Y -= velocity.Y;
 
-            if(position.Y <= 0+(hitbox.Height/2) || position.Y >= 1080-(hitbox.Height/2)-50){
+            if(position.Y <= 20 || position.Y >= 1080-20-50){
                 velocity.Y = velocity.Y*-1;
             }
 
-            if(position.X <= 0+(hitbox.Width/2) || position.X >= 1920-(hitbox.Width/2)){
+            if(position.X <= 20 || position.X >= 1920-20){
                 velocity.X = velocity.X*-1;
             }
         }

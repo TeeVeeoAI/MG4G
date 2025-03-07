@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace MG4G;
 
@@ -19,6 +20,10 @@ public class Game1 : Game
     private float lastShoot;
     private Score score;
     private Player lastToHaveBall;
+    private Song lebron;
+    private string what;
+    private Vector2 where;
+    private float howLong;
 
     public Game1()
     {
@@ -95,6 +100,10 @@ public class Game1 : Game
         }
 
         Dunk(gameTime);
+
+        if(gameTime.ElapsedGameTime.Seconds >= howLong + 3){
+            what = null;
+        }
         
         base.Update(gameTime);
     }
@@ -112,6 +121,8 @@ public class Game1 : Game
         player2.Draw(_spriteBatch);
         ball.Draw(_spriteBatch);
         score.DrawScore(_spriteBatch);
+        if (what != null)
+            _spriteBatch.DrawString(font, what, where, Color.Black);
         _spriteBatch.End();
 
         base.Draw(gameTime);
@@ -125,12 +136,18 @@ public class Game1 : Game
         if(player != null && player.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.Y <= hoopLeft.Position.Y){
             player.HasBall = false;
             score.UpdateScore(2, 0, gameTime);
+            what = "Dunk!";
+            where = hoopLeft.Position - new Vector2(-30, 100);
+            howLong = gameTime.ElapsedGameTime.Seconds;
         }
 
         //right dunk
         if(player != null && player.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.Y <= hoopRight.Position.Y){
             player.HasBall = false;
             score.UpdateScore(0, 2, gameTime);
+            what = "Dunk!";
+            where = hoopRight.Position - new Vector2(30, 100);
+            howLong = gameTime.ElapsedGameTime.Seconds;
         }
     }
 }
