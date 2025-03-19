@@ -13,6 +13,7 @@ public class Game1 : Game
     private Texture2D playerTexture;
     private Player player1, player2;
     private Texture2D ballTexture;
+    private Texture2D pixel;
     private Ball ball;
     private Texture2D hoopTextureRight, hoopTextureLeft;
     private Hoop hoopLeft, hoopRight;
@@ -24,6 +25,9 @@ public class Game1 : Game
     private string what;
     private Vector2 where;
     private float howLong;
+    private Rectangle threePLineLeft;
+    private Rectangle threePLineRight;
+    private bool fromThree;
 
     public Game1()
     {
@@ -51,6 +55,7 @@ public class Game1 : Game
         hoopTextureRight = Content.Load<Texture2D>("hoopRight");
         hoopTextureLeft = Content.Load<Texture2D>("hoopLeft");
         font = Content.Load<SpriteFont>("File");
+        pixel = Content.Load<Texture2D>("pixel");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
         player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, ball);
@@ -60,6 +65,8 @@ public class Game1 : Game
         hoopLeft = new Hoop(hoopTextureLeft, new Vector2(0, 1080 - 150/*hoop height/width*/ - 400/*the hoop height*/));
         hoopRight = new Hoop(hoopTextureRight, new Vector2(1920 - 150/*hoop height/width*/, 1080 - 150/*hoop height/width*/ - 400/*the hoop height*/));
         score = new Score(new Vector2(1920/2-50, 0), font);
+        threePLineLeft = new Rectangle((int)hoopLeft.Position.X+700+hoopLeft.Hitbox.Width, 1080-100, 10, 100);
+        threePLineRight = new Rectangle((int)hoopRight.Position.X-700, 1080-100, 10, 100);
 
         // TODO: use this.Content to load your game content here
     }
@@ -101,8 +108,8 @@ public class Game1 : Game
 
         Dunk(gameTime);
 
-        if(gameTime.ElapsedGameTime.Seconds >= howLong + 3){
-            what = null;
+        if(gameTime.ElapsedGameTime.Seconds >= howLong + 3f){
+            what = "";
         }
         
         base.Update(gameTime);
@@ -117,12 +124,13 @@ public class Game1 : Game
         _spriteBatch.Begin();
         hoopLeft.Draw(_spriteBatch);
         hoopRight.Draw(_spriteBatch);
+        _spriteBatch.Draw(pixel, threePLineLeft, Color.White);
+        _spriteBatch.Draw(pixel, threePLineRight, Color.Black);
         player1.Draw(_spriteBatch);
         player2.Draw(_spriteBatch);
         ball.Draw(_spriteBatch);
         score.DrawScore(_spriteBatch);
-        if (what != null)
-            _spriteBatch.DrawString(font, what, where, Color.Black);
+        _spriteBatch.DrawString(font, what != null ? what : " ", where, Color.Black);
         _spriteBatch.End();
 
         base.Draw(gameTime);
@@ -148,6 +156,14 @@ public class Game1 : Game
             what = "Dunk!";
             where = hoopRight.Position - new Vector2(30, 100);
             howLong = gameTime.ElapsedGameTime.Seconds;
+        }
+    }
+
+    public void madeShoot(GameTime gameTime){
+
+        //left hoop
+        if(ball.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.X >= 20 && ball.Position.X <= 130){
+            score.UpdateScore((fromThree ? 3 : 2), 0, gameTime);
         }
     }
 }

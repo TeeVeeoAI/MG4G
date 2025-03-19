@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Documents\\GitHub\\monogamecheatsheet\\MG4G\\MG4G.csproj": {}
+    "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\MG4G.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Documents\\GitHub\\monogamecheatsheet\\MG4G\\MG4G.csproj": {
+    "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\MG4G.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\monogamecheatsheet\\MG4G\\MG4G.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\MG4G.csproj",
         "projectName": "MG4G",
-        "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\monogamecheatsheet\\MG4G\\MG4G.csproj",
+        "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\MG4G.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\monogamecheatsheet\\MG4G\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

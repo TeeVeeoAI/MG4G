@@ -93,3 +93,8 @@ c:\Users\Admin\Documents\GitHub\monogamecheatsheet\MG4G\obj\Debug\net8.0-windows
 c:\Users\Admin\Documents\GitHub\monogamecheatsheet\MG4G\obj\Debug\net8.0-windows\MG4G.pdb
 C:\Users\Admin\Documents\GitHub\monogamecheatsheet\MG4G\obj\Debug\net8.0-windows\MG4G.genruntimeconfig.cache
 C:\Users\Admin\Documents\GitHub\monogamecheatsheet\MG4G\obj\Debug\net8.0-windows\ref\MG4G.dll
+C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\File.xnb
+C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoopLeft.xnb
+C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoopRight.xnb
+C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\hoppRight.xnb
+C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\pixel.xnb

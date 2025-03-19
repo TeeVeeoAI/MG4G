@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XnRVc3ywS3w=",
+  "dgSpecHash": "iSKOV9Vhtbs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Documents\\GitHub\\monogamecheatsheet\\MG4G\\MG4G.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\MG4G.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app\\2.1.30\\microsoft.netcore.app.2.1.30.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.1.30\\microsoft.netcore.dotnetapphost.2.1.30.nupkg.sha512",
