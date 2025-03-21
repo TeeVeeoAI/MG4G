@@ -16,7 +16,6 @@ namespace MG4G
         private Vector2 velocity;
         private SpriteEffects spriteEffects;
 
-
         //keyS and keyboardS
         private KeyboardState newState;
         private KeyboardState oldState;

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using SharpDX.MediaFoundation;
 
 namespace MG4G;
 
@@ -28,6 +29,9 @@ public class Game1 : Game
     private Rectangle threePLineLeft;
     private Rectangle threePLineRight;
     private bool fromThree;
+    private bool[] shootHit;
+    private float[] shootHitTime;
+    private Rectangle[] gTending;
 
     public Game1()
     {
@@ -67,6 +71,9 @@ public class Game1 : Game
         score = new Score(new Vector2(1920/2-50, 0), font);
         threePLineLeft = new Rectangle((int)hoopLeft.Position.X+700+hoopLeft.Hitbox.Width, 1080-100, 10, 100);
         threePLineRight = new Rectangle((int)hoopRight.Position.X-700, 1080-100, 10, 100);
+        shootHit = new bool[2]{false, false};
+        shootHitTime = new float[2];
+        gTending = new Rectangle[2]{new Rectangle((int)hoopLeft.Position.X, (int)hoopLeft.Position.Y - hoopLeft.Hitbox.Height*2, 400, 400), new Rectangle((int)hoopRight.Position.X-250, (int)hoopRight.Position.Y - hoopRight.Hitbox.Height*2, 400, 400)};
 
         // TODO: use this.Content to load your game content here
     }
@@ -84,6 +91,13 @@ public class Game1 : Game
         player1.Update(gameTime);
         player2.Update(gameTime);
         ball.Update(gameTime);
+
+        if (player1.HasBall && player1.Position.X <= threePLineLeft.X){
+            fromThree = true;
+        }
+        if (player2.HasBall && player2.Position.X >= threePLineRight.X){
+            fromThree = true;
+        }
 
         if(ball.Hitbox.Intersects(player1.Hitbox) && !player1.ShootB && !player2.HasBall){
             lastShoot = gameTime.TotalGameTime.Seconds;
@@ -108,9 +122,18 @@ public class Game1 : Game
 
         Dunk(gameTime);
 
-        if(gameTime.ElapsedGameTime.Seconds >= howLong + 3f){
+        if(gameTime.TotalGameTime.Seconds >= howLong + 3f){
             what = "";
         }
+
+        for(int i = 0; i < 2; i++){
+            if(gameTime.TotalGameTime.Seconds >= shootHitTime[i] + 3f){
+                shootHit[i] = false;
+            }
+        }
+
+        madeShoot(gameTime);
+        GTending(gameTime);
         
         base.Update(gameTime);
     }
@@ -146,7 +169,7 @@ public class Game1 : Game
             score.UpdateScore(2, 0, gameTime);
             what = "Dunk!";
             where = hoopLeft.Position - new Vector2(-30, 100);
-            howLong = gameTime.ElapsedGameTime.Seconds;
+            howLong = gameTime.TotalGameTime.Seconds;
         }
 
         //right dunk
@@ -155,15 +178,45 @@ public class Game1 : Game
             score.UpdateScore(0, 2, gameTime);
             what = "Dunk!";
             where = hoopRight.Position - new Vector2(30, 100);
-            howLong = gameTime.ElapsedGameTime.Seconds;
+            howLong = gameTime.TotalGameTime.Seconds;
         }
     }
 
     public void madeShoot(GameTime gameTime){
 
         //left hoop
-        if(ball.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.X >= 20 && ball.Position.X <= 130){
-            score.UpdateScore((fromThree ? 3 : 2), 0, gameTime);
+        if(ball.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.X >= 20 && ball.Position.X <= 130 && !shootHit[0] && ball.Velocity.Y < 0){
+            shootHit[0] = true;
+            shootHitTime[0] = gameTime.TotalGameTime.Seconds;
+            where = hoopLeft.Position - new Vector2(-30, 100);
+            what = fromThree ? "3 pointer" : "2 pointer";
+            howLong = gameTime.TotalGameTime.Seconds;
+            score.UpdateScore(fromThree ? 3 : 2, 0, gameTime);
+            fromThree = false;
+        }
+        if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20 && ball.Position.X >= 1980-130 && !shootHit[1] && ball.Velocity.Y < 0){
+            shootHit[1] = true;
+            shootHitTime[1] = gameTime.TotalGameTime.Seconds;
+            where = hoopRight.Position - new Vector2(30, 100);
+            what = fromThree ? "3 pointer" : "2 pointer";
+            howLong = gameTime.TotalGameTime.Seconds;
+            score.UpdateScore(0, fromThree ? 3 : 2, gameTime);
+            fromThree = false;
+        }
+    }
+
+    public void GTending(GameTime gameTime){
+        for(int i = 0; i < 2; i++){
+            if(ball.Hitbox.Intersects(gTending[i]) && ball.Velocity.Y < 0){
+                what = "GTending!";
+                where.X = (float)gTending[0].X;
+                where.Y = (float)gTending[0].Y;
+                howLong = gameTime.TotalGameTime.Seconds; 
+                if (player1.HasBall){
+                    player1.HasBall = false;
+                    player2.HasBall = true;
+                }
+            }
         }
     }
 }
