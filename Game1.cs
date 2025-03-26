@@ -193,6 +193,8 @@ public class Game1 : Game
             score.UpdateScore(fromThree ? 3 : 2, 0, gameTime);
             fromThree = false;
         }
+        
+        //right hoop
         if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20 && ball.Position.X >= 1980-130 && !shootHit[1] && ball.Position.Y > hoopRight.Position.Y){
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
