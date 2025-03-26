@@ -1,4 +1,3 @@
-using System.Security;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,16 +6,14 @@ namespace MG4G
 {
     public class Player
     {
-
-
-        //basic
+        // Basic
         private Texture2D texture;
         private Vector2 position;
         private Rectangle hitbox;
         private Vector2 velocity;
         private SpriteEffects spriteEffects;
 
-        //keyS and keyboardS
+        // Keyboard Controls
         private KeyboardState newState;
         private KeyboardState oldState;
         private Keys left;
@@ -25,27 +22,24 @@ namespace MG4G
         private Keys shootL;
         private Keys shootR;
 
+        // Physics
+        private float gravity = 0.6f;  // Gravity force
+        private float jumpStrength = -20f;
+        private bool isGrounded;
+        private float groundY = 1080 - 350; // Example ground level
 
-        //Jump
-        private bool jump;
-        private Vector2 prevPos;
-        private bool hitTop;
-        private float jumpStartTime;
-        int jumpHeight;
-
-
-        //Ball
+        // Ball
         private Ball ball;
         private bool hasBall;
         private bool shootB;
 
+        public Rectangle Hitbox { get => hitbox; }
+        public Vector2 Position { get => position; }
+        public bool HasBall { get => hasBall; set => hasBall = value; }
+        public bool ShootB { get => shootB; set => shootB = value; }
 
-        public Rectangle Hitbox{ get => hitbox; }
-        public Vector2 Position{ get => position; }
-        public bool HasBall{ get => hasBall; set => hasBall = value; }
-        public bool ShootB{ get =>shootB; set => shootB = value; }
-
-        public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up, Keys shootL, Keys shootR, Ball ball){
+        public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up, Keys shootL, Keys shootR, Ball ball)
+        {
             this.texture = texture;
             this.position = position;
             this.left = left;
@@ -57,98 +51,73 @@ namespace MG4G
 
             hitbox = new Rectangle((int)position.X, (int)position.Y, 100, 300);
 
-            hitTop = false;
+            isGrounded = false;
             hasBall = false;
-            jump = false;
             shootB = false;
-            jumpHeight = 400;
         }
 
         public void Move(GameTime gameTime){
+            // Get keyboard state
+            newState = Keyboard.GetState();
 
-            //Move.Left
-            if(newState.IsKeyDown(left) && position.X >= 0 && !jump){
+            // Move Left
+            if (newState.IsKeyDown(left) && position.X >= 0){
                 velocity.X = -4;
             }
-            
-            //Move.Right
-            if(newState.IsKeyDown(right) && position.X <= 1920-hitbox.Width && !jump){
+
+            // Move Right
+            if (newState.IsKeyDown(right) && position.X <= 1920 - hitbox.Width){
                 velocity.X = 4;
             }
 
-            if (newState.IsKeyDown(left) && newState.IsKeyDown(right)){
-                velocity.X = 0;
-            }
-            
-            //Move.Stop
-            if(((newState.IsKeyUp(left) && oldState.IsKeyDown(left) && position.X >= 0)
-                || (newState.IsKeyUp(right) && oldState.IsKeyDown(right) && position.X <= 1920-hitbox.Width)) && !jump){
+            // Stop Movement if both keys are pressed or released
+            if (newState.IsKeyDown(left) && newState.IsKeyDown(right) || 
+                (newState.IsKeyUp(left) && oldState.IsKeyDown(left)) ||
+                (newState.IsKeyUp(right) && oldState.IsKeyDown(right))){
                 velocity.X = 0;
             }
 
-            if(position.X <= 0 || position.X >= 1920-hitbox.Width){
-                position.X += velocity.X*2;
-                velocity.X = 0;
+            // Jumping
+            if (newState.IsKeyDown(up) && oldState.IsKeyUp(up) && isGrounded){
+                velocity.Y = jumpStrength; // Apply jump force
+                isGrounded = false;
             }
 
-            //Move.Up
-            if(newState.IsKeyDown(up) && oldState.IsKeyUp(up) && !jump){
-                jump = true;
-                prevPos = position;
-                jumpStartTime = gameTime.TotalGameTime.Seconds;
-            }
-
-            //Shoot
-            if(newState.IsKeyDown(shootL) && oldState.IsKeyUp(shootL) && hasBall){
+            // Shooting
+            if (newState.IsKeyDown(shootL) && oldState.IsKeyUp(shootL) && hasBall){
                 ball.VelocityX = 4;
+                ball.VelocityY = 4;
                 Shoot(gameTime);
             }
-            if(newState.IsKeyDown(shootR) && oldState.IsKeyUp(shootR) && hasBall){
+            if (newState.IsKeyDown(shootR) && oldState.IsKeyUp(shootR) && hasBall){
                 ball.VelocityX = -4;
+                ball.VelocityY = 4;
                 Shoot(gameTime);
             }
 
-            position.X += velocity.X*1.1f;
-
-            hitbox.Location = position.ToPoint();
+            oldState = newState;
         }
 
-        public void Jump(GameTime gameTime){
-            if(jump){
-                float velocityXB = velocity.X;
-                float bVelocityY = 4;
-
-                velocity.Y = jumpHeight*3/100-1 - (gameTime.TotalGameTime.Seconds - jumpStartTime);
-                velocity.X = velocityXB * 0.99f;
-
-                if (hasBall)
-                    ball.VelocityY = bVelocityY + velocity.Y/2;
-
-                if (position.X >= 1920-hitbox.Width || position.X <= 0){
-                    velocity.X = 0;
-                }
-                
-                if(position.Y <= prevPos.Y - jumpHeight){
-                    hitTop = true;
-                }
-
-                if(hitTop){
-                    velocity.Y = velocity.Y*-1;
-                    if (hasBall)
-                        ball.VelocityY = bVelocityY - velocity.Y/2;
-                }
-
-                position.Y -= velocity.Y*1.1f;
+        public void ApplyPhysics(GameTime gameTime){
+            // Apply gravity
+            if (!isGrounded)
+            {
+                velocity.Y += gravity;
             }
-            
-            if (position.Y > 1080-hitbox.Height-50 && hitTop){
+
+            // Apply velocity to position
+            position += velocity;
+
+            // Ground collision detection
+            if (position.Y >= groundY)
+            {
+                position.Y = groundY;
                 velocity.Y = 0;
-                jump = false;
-                hitTop = false;
-                velocity.X = 0;
-                if (hasBall)
-                    ball.VelocityY = 4;
+                isGrounded = true;
             }
+
+            // Update hitbox position
+            hitbox.Location = position.ToPoint();
         }
 
         public void Shoot(GameTime gameTime){
@@ -164,7 +133,7 @@ namespace MG4G
         public void Update(GameTime gameTime){
             newState = Keyboard.GetState();
             Move(gameTime);
-            Jump(gameTime);
+            ApplyPhysics(gameTime);
             if (velocity.X > 0){
                 spriteEffects = SpriteEffects.None;
             } else if (velocity.X < 0){

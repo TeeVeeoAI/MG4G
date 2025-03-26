@@ -63,7 +63,7 @@ public class Game1 : Game
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
         player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, ball);
-        player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.NumPad6, Keys.NumPad4, ball);
+        player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.PageDown, Keys.PageUp, ball);
         ball.Player1 = player1;
         ball.Player2 = player2; 
         hoopLeft = new Hoop(hoopTextureLeft, new Vector2(0, 1080 - 150/*hoop height/width*/ - 400/*the hoop height*/));
