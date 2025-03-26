@@ -91,11 +91,11 @@ public class Game1 : Game
         player2.Update(gameTime);
         ball.Update(gameTime);
 
-        if (player1.HasBall && player1.Position.X <= threePLineLeft.X){
-            fromThree = true;
+        if (player1.HasBall){
+            fromThree = player1.Position.X <= threePLineLeft.X ? true : false;
         }
-        if (player2.HasBall && player2.Position.X >= threePLineRight.X){
-            fromThree = true;
+        if (player2.HasBall){
+            fromThree = player2.Position.X >= threePLineRight.X ? true : false;
         }
 
         if(ball.Hitbox.Intersects(player1.Hitbox) && !player1.ShootB && !player2.HasBall){
@@ -195,10 +195,10 @@ public class Game1 : Game
         }
         
         //right hoop
-        if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20 && ball.Position.X >= 1980-130 && !shootHit[1] && ball.Position.Y > hoopRight.Position.Y){
+        if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20-50 && ball.Position.X >= 1980-130-50 && !shootHit[1] && ball.Position.Y > hoopRight.Position.Y){
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
-            where = hoopRight.Position - new Vector2(30, 100);
+            where = hoopRight.Position - new Vector2(30+100, 100);
             what = fromThree ? "3 pointer" : "2 pointer";
             howLong = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(0, fromThree ? 3 : 2, gameTime);
