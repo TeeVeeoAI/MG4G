@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using SharpDX.MediaFoundation;
@@ -164,7 +163,7 @@ public class Game1 : Game
         Player player = ball.WhoHasTheBall(gameTime);
 
         //left dunk
-        if(player != null && player.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.Y <= hoopLeft.Position.Y){
+        if(player != null && player.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.Y - 20f <= hoopLeft.Position.Y){
             player.HasBall = false;
             score.UpdateScore(2, 0, gameTime);
             what = "Dunk!";
@@ -173,7 +172,7 @@ public class Game1 : Game
         }
 
         //right dunk
-        if(player != null && player.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.Y <= hoopRight.Position.Y){
+        if(player != null && player.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.Y - 20f <= hoopRight.Position.Y){
             player.HasBall = false;
             score.UpdateScore(0, 2, gameTime);
             what = "Dunk!";
@@ -185,7 +184,7 @@ public class Game1 : Game
     public void madeShoot(GameTime gameTime){
 
         //left hoop
-        if(ball.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.X >= 20 && ball.Position.X <= 130 && !shootHit[0] && ball.Velocity.Y < 0){
+        if(ball.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.X >= 20 && ball.Position.X <= 130 && !shootHit[0] && ball.Position.Y > hoopLeft.Position.Y){
             shootHit[0] = true;
             shootHitTime[0] = gameTime.TotalGameTime.Seconds;
             where = hoopLeft.Position - new Vector2(-30, 100);
@@ -194,7 +193,7 @@ public class Game1 : Game
             score.UpdateScore(fromThree ? 3 : 2, 0, gameTime);
             fromThree = false;
         }
-        if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20 && ball.Position.X >= 1980-130 && !shootHit[1] && ball.Velocity.Y < 0){
+        if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20 && ball.Position.X >= 1980-130 && !shootHit[1] && ball.Position.Y > hoopRight.Position.Y){
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
             where = hoopRight.Position - new Vector2(30, 100);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Github/MG4G/Content/hoopRight.png</SourceFile>
-  <SourceTime>2025-03-03T14:54:22.377807+01:00</SourceTime>
-  <DestFile>C:/Github/MG4G/Content/bin/Windows/Content/hoopRight.xnb</DestFile>
-  <DestTime>2025-03-25T14:33:21.2170305+01:00</DestTime>
+  <SourceFile>C:/Users/Gamer/Documents/GitHub/MG4G/Content/hoopRight.png</SourceFile>
+  <SourceTime>2025-03-17T16:28:33.6497617+01:00</SourceTime>
+  <DestFile>C:/Users/Gamer/Documents/GitHub/MG4G/Content/bin/Windows/Content/hoopRight.xnb</DestFile>
+  <DestTime>2025-03-26T14:41:15.9149372+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T19:05:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -25,6 +25,7 @@ namespace MG4G
         // Physics
         private float gravity = 0.6f;  // Gravity force
         private float jumpStrength = -20f;
+        private Vector2 shootStrength = new Vector2(6f, -25f);
         private bool isGrounded;
         private float groundY = 1080 - 350; // Example ground level
 
@@ -61,19 +62,21 @@ namespace MG4G
             newState = Keyboard.GetState();
 
             // Move Left
-            if (newState.IsKeyDown(left) && position.X >= 0){
+            if (newState.IsKeyDown(left) && position.X >= 0 && isGrounded){
                 velocity.X = -4;
             }
 
             // Move Right
-            if (newState.IsKeyDown(right) && position.X <= 1920 - hitbox.Width){
+            if (newState.IsKeyDown(right) && position.X <= 1920 - hitbox.Width && isGrounded){
                 velocity.X = 4;
             }
 
             // Stop Movement if both keys are pressed or released
-            if (newState.IsKeyDown(left) && newState.IsKeyDown(right) || 
-                (newState.IsKeyUp(left) && oldState.IsKeyDown(left)) ||
-                (newState.IsKeyUp(right) && oldState.IsKeyDown(right))){
+            if (newState.IsKeyDown(left) && newState.IsKeyDown(right) && isGrounded || 
+                newState.IsKeyUp(left) && oldState.IsKeyDown(left) && isGrounded ||
+                newState.IsKeyUp(right) && oldState.IsKeyDown(right) && isGrounded ||
+                newState.IsKeyUp(left) && newState.IsKeyUp(right) && isGrounded)
+            {
                 velocity.X = 0;
             }
 
@@ -85,13 +88,13 @@ namespace MG4G
 
             // Shooting
             if (newState.IsKeyDown(shootL) && oldState.IsKeyUp(shootL) && hasBall){
-                ball.VelocityX = 4;
-                ball.VelocityY = 4;
+                ball.VelocityX = shootStrength.X + velocity.X;
+                ball.VelocityY = shootStrength.Y;
                 Shoot(gameTime);
             }
             if (newState.IsKeyDown(shootR) && oldState.IsKeyUp(shootR) && hasBall){
-                ball.VelocityX = -4;
-                ball.VelocityY = 4;
+                ball.VelocityX = -shootStrength.X + velocity.X;
+                ball.VelocityY = shootStrength.Y;
                 Shoot(gameTime);
             }
 
@@ -103,6 +106,11 @@ namespace MG4G
             if (!isGrounded)
             {
                 velocity.Y += gravity;
+                if (position.X >= 1920 - hitbox.Width ||
+                    position.X <= 0 )
+                {
+                    velocity.X = 0;
+                }
             }
 
             // Apply velocity to position
