@@ -23,11 +23,11 @@ namespace MG4G
         private Keys shootR;
 
         // Physics
-        private float gravity = 0.6f;  // Gravity force
+        private float gravity = 0.6f;
         private float jumpStrength = -20f;
         private Vector2 shootStrength = new Vector2(6f, -25f);
         private bool isGrounded;
-        private float groundY = 1080 - 350; // Example ground level
+        private float groundY = 1080 - 350;
 
         // Ball
         private Ball ball;
@@ -102,7 +102,6 @@ namespace MG4G
         }
 
         public void ApplyPhysics(GameTime gameTime){
-            // Apply gravity
             if (!isGrounded)
             {
                 velocity.Y += gravity;
@@ -113,7 +112,6 @@ namespace MG4G
                 }
             }
 
-            // Apply velocity to position
             position += velocity;
 
             // Ground collision detection
@@ -124,13 +122,12 @@ namespace MG4G
                 isGrounded = true;
             }
 
-            // Update hitbox position
             hitbox.Location = position.ToPoint();
         }
 
         public void Shoot(GameTime gameTime){
-            ball.VelocityX = ball.VelocityX;
-            ball.VelocityY = ball.VelocityY;
+            ball.VelocityX = ball.Velocity.X;
+            ball.VelocityY = ball.Velocity.Y;
             hasBall = false;
         }
 

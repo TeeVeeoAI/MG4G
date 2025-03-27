@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -184,7 +185,7 @@ public class Game1 : Game
     public void madeShoot(GameTime gameTime){
 
         //left hoop
-        if(ball.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.X >= 20 && ball.Position.X <= 130 && !shootHit[0] && ball.Position.Y > hoopLeft.Position.Y){
+        if(ball.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.X >= 20 && ball.Position.X <= 130 && !shootHit[0] && ball.Position.Y > hoopLeft.Position.Y && ball.Velocity.Y > 0){
             shootHit[0] = true;
             shootHitTime[0] = gameTime.TotalGameTime.Seconds;
             where = hoopLeft.Position - new Vector2(-30, 100);
@@ -195,7 +196,7 @@ public class Game1 : Game
         }
         
         //right hoop
-        if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20-50 && ball.Position.X >= 1980-130-50 && !shootHit[1] && ball.Position.Y > hoopRight.Position.Y){
+        if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20-50 && ball.Position.X >= 1980-130-50 && !shootHit[1] && ball.Position.Y > hoopRight.Position.Y && ball.Velocity.Y > 0){
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
             where = hoopRight.Position - new Vector2(30+100, 100);

@@ -22,8 +22,8 @@ namespace MG4G
         public Player Player2 { set => player2 = value; }
         public Rectangle Hitbox { get => hitbox; }
         public Vector2 Velocity { get => velocity; }
-        public float VelocityX { get => velocity.X; set => velocity.X = value; }
-        public float VelocityY { get => velocity.Y; set => velocity.Y = value; }
+        public float VelocityX { set => velocity.X = value; }
+        public float VelocityY { set => velocity.Y = value; }
         public Vector2 Position { get => position; }
 
         public Ball(Texture2D texture, Vector2 position){
