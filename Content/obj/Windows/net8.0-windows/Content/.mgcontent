@@ -4,13 +4,13 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/GitHub/MG4G/Content/File.spritefont</File>
-    <File>C:/GitHub/MG4G/Content/goat.png</File>
-    <File>C:/GitHub/MG4G/Content/hoopLeft.png</File>
-    <File>C:/GitHub/MG4G/Content/hoopRight.png</File>
-    <File>C:/GitHub/MG4G/Content/hoppRight.png</File>
-    <File>C:/GitHub/MG4G/Content/images.png</File>
-    <File>C:/GitHub/MG4G/Content/pixel.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/File.spritefont</File>
+    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/goat.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/hoopLeft.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/hoopRight.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/hoppRight.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/images.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/pixel.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

@@ -32,6 +32,8 @@ public class Game1 : Game
     private bool[] shootHit;
     private float[] shootHitTime;
     private Rectangle[] gTending;
+    private bool[] stealAtt;
+    private float[] stealTime;
 
     public Game1()
     {
@@ -62,8 +64,8 @@ public class Game1 : Game
         pixel = Content.Load<Texture2D>("pixel");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
-        player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, ball);
-        player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.PageDown, Keys.PageUp, ball);
+        player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, Keys.V, ball);
+        player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.PageDown, Keys.PageUp, Keys.Down, ball);
         ball.Player1 = player1;
         ball.Player2 = player2; 
         hoopLeft = new Hoop(hoopTextureLeft, new Vector2(0, 1080 - 150/*hoop height/width*/ - 400/*the hoop height*/));
@@ -74,6 +76,8 @@ public class Game1 : Game
         shootHit = new bool[2]{false, false};
         shootHitTime = new float[2];
         gTending = new Rectangle[2]{new Rectangle((int)hoopLeft.Position.X, (int)hoopLeft.Position.Y - hoopLeft.Hitbox.Height*2, 400, 400), new Rectangle((int)hoopRight.Position.X-250, (int)hoopRight.Position.Y - hoopRight.Hitbox.Height*2, 400, 400)};
+        stealAtt = new bool[2]{false, false};
+        stealTime = new float[2];
 
         // TODO: use this.Content to load your game content here
     }
@@ -120,6 +124,13 @@ public class Game1 : Game
             lastToHaveBall = player2;
         }
 
+        if(gameTime.TotalGameTime.Seconds >= stealTime[0] + 10f){
+            stealAtt[0] = false;
+        }
+        if(gameTime.TotalGameTime.Seconds >= stealTime[1] + 10f){
+            stealAtt[1] = false;
+        }
+
         Dunk(gameTime);
 
         if(gameTime.TotalGameTime.Seconds >= howLong + 3f){
@@ -132,7 +143,8 @@ public class Game1 : Game
             }
         }
 
-        madeShoot(gameTime);
+        Steal(gameTime);
+        MadeShoot(gameTime);
         GTending(gameTime);
         
         base.Update(gameTime);
@@ -160,12 +172,14 @@ public class Game1 : Game
     }
 
     public void Dunk(GameTime gameTime){
-
-        Player player = ball.WhoHasTheBall(gameTime);
-
         //left dunk
-        if(player != null && player.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.Y - 20f <= hoopLeft.Position.Y){
-            player.HasBall = false;
+        if( player2.Hitbox.Intersects(hoopLeft.Hitbox) && 
+            ball.Position.Y - 20f <= hoopLeft.Position.Y && 
+            player2.HasBall)
+            {
+            player2.HasBall = false;
+            shootHit[0] = true;
+            shootHitTime[0] = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(2, 0, gameTime);
             what = "Dunk!";
             where = hoopLeft.Position - new Vector2(-30, 100);
@@ -173,8 +187,13 @@ public class Game1 : Game
         }
 
         //right dunk
-        if(player != null && player.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.Y - 20f <= hoopRight.Position.Y){
-            player.HasBall = false;
+        if( player1.Hitbox.Intersects(hoopRight.Hitbox) && 
+            ball.Position.Y - 20f <= hoopRight.Position.Y && 
+            player1.HasBall)
+        {
+            player1.HasBall = false;
+            shootHit[1] = true;
+            shootHitTime[1] = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(0, 2, gameTime);
             what = "Dunk!";
             where = hoopRight.Position - new Vector2(30, 100);
@@ -182,10 +201,17 @@ public class Game1 : Game
         }
     }
 
-    public void madeShoot(GameTime gameTime){
+    public void MadeShoot(GameTime gameTime){
 
         //left hoop
-        if(ball.Hitbox.Intersects(hoopLeft.Hitbox) && ball.Position.X >= 20 && ball.Position.X <= 130 && !shootHit[0] && ball.Position.Y > hoopLeft.Position.Y && ball.Velocity.Y > 0){
+        if( ball.Hitbox.Intersects(hoopLeft.Hitbox) && 
+            ball.Position.X >= 20 && ball.Position.X <= 130 && 
+            !shootHit[0] && 
+            ball.Position.Y > hoopLeft.Position.Y && 
+            ball.Velocity.Y > 0 && 
+            ball.WhoHasTheBall(gameTime) != player1 && 
+            ball.WhoHasTheBall(gameTime) != player2)
+            {
             shootHit[0] = true;
             shootHitTime[0] = gameTime.TotalGameTime.Seconds;
             where = hoopLeft.Position - new Vector2(-30, 100);
@@ -196,7 +222,15 @@ public class Game1 : Game
         }
         
         //right hoop
-        if(ball.Hitbox.Intersects(hoopRight.Hitbox) && ball.Position.X <= 1980-20-50 && ball.Position.X >= 1980-130-50 && !shootHit[1] && ball.Position.Y > hoopRight.Position.Y && ball.Velocity.Y > 0){
+        if( ball.Hitbox.Intersects(hoopRight.Hitbox) && 
+            ball.Position.X <= 1980-20-50 && 
+            ball.Position.X >= 1980-130-50 && 
+            !shootHit[1] && 
+            ball.Position.Y > hoopRight.Position.Y && 
+            ball.Velocity.Y > 0 && 
+            ball.WhoHasTheBall(gameTime) != player1 && 
+            ball.WhoHasTheBall(gameTime) != player2)
+            {
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
             where = hoopRight.Position - new Vector2(30+100, 100);
@@ -209,15 +243,41 @@ public class Game1 : Game
 
     public void GTending(GameTime gameTime){
         for(int i = 0; i < 2; i++){
-            if(ball.Hitbox.Intersects(gTending[i]) && ball.Velocity.Y < 0){
+            if( ball.Hitbox.Intersects(gTending[i]) && 
+                ball.Position.Y <= 530 && 
+                ball.Velocity.Y > 0 &&
+                (player1.Hitbox.Intersects(ball.Hitbox) || player2.Hitbox.Intersects(ball.Hitbox)))
+                {
                 what = "GTending!";
-                where.X = (float)gTending[0].X;
-                where.Y = (float)gTending[0].Y;
+                where.X = (float)gTending[1].X;
+                where.Y = (float)gTending[1].Y;
                 howLong = gameTime.TotalGameTime.Seconds; 
                 if (player1.HasBall){
                     player1.HasBall = false;
                     player2.HasBall = true;
+                } else if (player2.HasBall){
+                    player2.HasBall = false;
+                    player1.HasBall = true;
                 }
+            }
+        }
+    }
+
+    public void Steal(GameTime gameTime){
+        if(player1.Steal(gameTime) && !stealAtt[0]){
+            stealAtt[0] = true;
+            stealTime[0] = gameTime.TotalGameTime.Seconds;
+            if (player1.Hitbox.Intersects(player2.Hitbox) && player2.HasBall){
+                player1.HasBall = true;
+                player2.HasBall = false;
+            }
+        }
+        if(player2.Steal(gameTime) && !stealAtt[1]){
+            stealAtt[1] = true;
+            stealTime[1] = gameTime.TotalGameTime.Seconds;
+            if (player2.Hitbox.Intersects(player1.Hitbox) && player1.HasBall){
+                player2.HasBall = true;
+                player1.HasBall = false;
             }
         }
     }

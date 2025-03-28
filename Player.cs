@@ -21,6 +21,7 @@ namespace MG4G
         private Keys up;
         private Keys shootL;
         private Keys shootR;
+        private Keys steal;
 
         // Physics
         private float gravity = 0.6f;
@@ -39,7 +40,7 @@ namespace MG4G
         public bool HasBall { get => hasBall; set => hasBall = value; }
         public bool ShootB { get => shootB; set => shootB = value; }
 
-        public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up, Keys shootL, Keys shootR, Ball ball)
+        public Player(Texture2D texture, Vector2 position, Keys left, Keys right, Keys up, Keys shootL, Keys shootR, Keys steal, Ball ball)
         {
             this.texture = texture;
             this.position = position;
@@ -48,6 +49,7 @@ namespace MG4G
             this.up = up;
             this.shootL = shootL;
             this.shootR = shootR;
+            this.steal = steal;
             this.ball = ball;
 
             hitbox = new Rectangle((int)position.X, (int)position.Y, 100, 300);
@@ -129,6 +131,14 @@ namespace MG4G
             ball.VelocityX = ball.Velocity.X;
             ball.VelocityY = ball.Velocity.Y;
             hasBall = false;
+        }
+
+        public bool Steal(GameTime gameTime){
+            if (newState.IsKeyDown(steal)){
+                return true;
+            } else {
+                return false;
+            }
         }
 
         public void Dunk(GameTime gameTime){
