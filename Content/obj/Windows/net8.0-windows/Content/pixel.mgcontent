@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Admin/Documents/GitHub/MG4G/Content/pixel.png</SourceFile>
-  <SourceTime>2025-03-21T09:57:31.073628+01:00</SourceTime>
-  <DestFile>C:/Users/Admin/Documents/GitHub/MG4G/Content/bin/Windows/Content/pixel.xnb</DestFile>
-  <DestTime>2025-03-28T09:56:26.2275034+01:00</DestTime>
+  <SourceFile>C:/Github/MG4G/Content/pixel.png</SourceFile>
+  <SourceTime>2025-03-19T12:17:32.8388572+01:00</SourceTime>
+  <DestFile>C:/Github/MG4G/Content/bin/Windows/Content/pixel.xnb</DestFile>
+  <DestTime>2025-03-28T14:27:06.4499408+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T19:05:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

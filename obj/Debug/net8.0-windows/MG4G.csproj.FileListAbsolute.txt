@@ -169,3 +169,5 @@ C:\Users\Gamer\Documents\GitHub\MG4G\obj\Debug\net8.0-windows\ref\MG4G.dll
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\pixel.xnb
 C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\goat_real.xnb
 C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\player.xnb
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\goat_real.xnb
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\player.xnb

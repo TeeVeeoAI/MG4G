@@ -180,7 +180,7 @@ public class Game1 : Game
             player2.HasBall = false;
             shootHit[0] = true;
             shootHitTime[0] = gameTime.TotalGameTime.Seconds;
-            score.UpdateScore(2, 0, gameTime);
+            score.UpdateScore(0, 2, gameTime);
             what = "Dunk!";
             where = hoopLeft.Position - new Vector2(-30, 100);
             howLong = gameTime.TotalGameTime.Seconds;
@@ -194,7 +194,7 @@ public class Game1 : Game
             player1.HasBall = false;
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
-            score.UpdateScore(0, 2, gameTime);
+            score.UpdateScore(2, 0, gameTime);
             what = "Dunk!";
             where = hoopRight.Position - new Vector2(30, 100);
             howLong = gameTime.TotalGameTime.Seconds;
@@ -217,7 +217,7 @@ public class Game1 : Game
             where = hoopLeft.Position - new Vector2(-30, 100);
             what = fromThree ? "3 pointer" : "2 pointer";
             howLong = gameTime.TotalGameTime.Seconds;
-            score.UpdateScore(fromThree ? 3 : 2, 0, gameTime);
+            score.UpdateScore(0,fromThree ? 3 : 2, gameTime);
             fromThree = false;
         }
         
@@ -236,7 +236,7 @@ public class Game1 : Game
             where = hoopRight.Position - new Vector2(30+100, 100);
             what = fromThree ? "3 pointer" : "2 pointer";
             howLong = gameTime.TotalGameTime.Seconds;
-            score.UpdateScore(0, fromThree ? 3 : 2, gameTime);
+            score.UpdateScore(fromThree ? 3 : 2, 0, gameTime);
             fromThree = false;
         }
     }
