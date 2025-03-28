@@ -56,8 +56,8 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        ballTexture = Content.Load<Texture2D>("goat");
-        playerTexture = Content.Load<Texture2D>("images");
+        ballTexture = Content.Load<Texture2D>("goat_real");
+        playerTexture = Content.Load<Texture2D>("player");
         hoopTextureRight = Content.Load<Texture2D>("hoopRight");
         hoopTextureLeft = Content.Load<Texture2D>("hoopLeft");
         font = Content.Load<SpriteFont>("File");
