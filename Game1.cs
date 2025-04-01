@@ -177,7 +177,10 @@ public class Game1 : Game
             ball.Position.Y - 20f <= hoopLeft.Position.Y && 
             player2.HasBall)
             {
+            player1.ShootB = false;
+            player2.ShootB = false;
             player2.HasBall = false;
+            player1.HasBall = true;
             shootHit[0] = true;
             shootHitTime[0] = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(0, 2, gameTime);
@@ -190,8 +193,11 @@ public class Game1 : Game
         if( player1.Hitbox.Intersects(hoopRight.Hitbox) && 
             ball.Position.Y - 20f <= hoopRight.Position.Y && 
             player1.HasBall)
-        {
+            {
+            player1.ShootB = false;
+            player2.ShootB = false;
             player1.HasBall = false;
+            player2.HasBall = true;
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(2, 0, gameTime);
@@ -212,6 +218,8 @@ public class Game1 : Game
             ball.WhoHasTheBall(gameTime) != player1 && 
             ball.WhoHasTheBall(gameTime) != player2)
             {
+            player1.ShootB = false;
+            player2.ShootB = false;
             shootHit[0] = true;
             shootHitTime[0] = gameTime.TotalGameTime.Seconds;
             where = hoopLeft.Position - new Vector2(-30, 100);
@@ -231,6 +239,8 @@ public class Game1 : Game
             ball.WhoHasTheBall(gameTime) != player1 && 
             ball.WhoHasTheBall(gameTime) != player2)
             {
+            player1.ShootB = false;
+            player2.ShootB = false;
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
             where = hoopRight.Position - new Vector2(30+100, 100);
@@ -259,6 +269,8 @@ public class Game1 : Game
                     player2.HasBall = false;
                     player1.HasBall = true;
                 }
+                player1.ShootB = false;
+                player2.ShootB = false;
             }
         }
     }
@@ -271,6 +283,8 @@ public class Game1 : Game
                 player1.HasBall = true;
                 player2.HasBall = false;
             }
+            player1.ShootB = false;
+            player2.ShootB = false;
         }
         if(player2.Steal(gameTime) && !stealAtt[1]){
             stealAtt[1] = true;
@@ -279,6 +293,8 @@ public class Game1 : Game
                 player2.HasBall = true;
                 player1.HasBall = false;
             }
+            player1.ShootB = false;
+            player2.ShootB = false;
         }
     }
 }
