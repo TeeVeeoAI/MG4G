@@ -35,7 +35,7 @@ public class Game1 : Game
     private Rectangle[] gTending;
     private bool[] stealAtt;
     private float[] stealTime;
-    private bool pause;
+    private bool[] pause;
     private float[] pauseTime;
 
     public Game1()
@@ -81,7 +81,7 @@ public class Game1 : Game
         gTending = new Rectangle[2]{new Rectangle((int)hoopLeft.Position.X, (int)hoopLeft.Position.Y - hoopLeft.Hitbox.Height*2, 400, 400), new Rectangle((int)hoopRight.Position.X-250, (int)hoopRight.Position.Y - hoopRight.Hitbox.Height*2, 400, 400)};
         stealAtt = new bool[2]{false, false};
         stealTime = new float[2];
-        pause = false;
+        pause = new bool[2]{false,false};
         pauseTime = new float[2];
 
         // TODO: use this.Content to load your game content here
@@ -96,14 +96,14 @@ public class Game1 : Game
 
 
         // TODO: Add your update logic here
-        if (pauseTime[0] + 1.5f >= gameTime.TotalGameTime.Seconds){
-            pause = true;
-            pauseTime[1] = gameTime.TotalGameTime.Seconds;
+        if (pauseTime[0] + .5f <= gameTime.TotalGameTime.Seconds && pause[0]){
+            Pause(gameTime);
+            pause[0] = false;
         }
 
-        if (pause){
-            if (pauseTime[1] + 10f <= gameTime.TotalGameTime.Seconds){
-                pause = false;
+        if (pause[1]){
+            if (pauseTime[1] + 1f <= gameTime.TotalGameTime.Seconds){
+                pause[1] = false;
             } else {
                 return;
             }
@@ -326,10 +326,11 @@ public class Game1 : Game
         player1.Reset(gameTime);
         player2.Reset(gameTime);
         pauseTime[0] = gameTime.TotalGameTime.Seconds;
+        pause[0] = true;
     }
 
     public void Pause(GameTime gameTime){
-        pause = true;
+        pause[1] = true;
         pauseTime[1] = gameTime.TotalGameTime.Seconds;
     }
 }
