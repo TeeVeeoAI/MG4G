@@ -34,6 +34,7 @@ namespace MG4G
         private Ball ball;
         private bool hasBall;
         private bool shootB;
+        private Vector2 startPos;
 
         public Rectangle Hitbox { get => hitbox; }
         public Vector2 Position { get => position; }
@@ -44,6 +45,7 @@ namespace MG4G
         {
             this.texture = texture;
             this.position = position;
+            this.startPos = position;
             this.left = left;
             this.right = right;
             this.up = up;
@@ -143,6 +145,10 @@ namespace MG4G
 
         public void Dunk(GameTime gameTime){
             hasBall = false;
+        }
+
+        public void Reset(GameTime gameTime){
+            position = startPos;
         }
 
         public void Update(GameTime gameTime){

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -34,6 +35,8 @@ public class Game1 : Game
     private Rectangle[] gTending;
     private bool[] stealAtt;
     private float[] stealTime;
+    private bool pause;
+    private float[] pauseTime;
 
     public Game1()
     {
@@ -78,6 +81,8 @@ public class Game1 : Game
         gTending = new Rectangle[2]{new Rectangle((int)hoopLeft.Position.X, (int)hoopLeft.Position.Y - hoopLeft.Hitbox.Height*2, 400, 400), new Rectangle((int)hoopRight.Position.X-250, (int)hoopRight.Position.Y - hoopRight.Hitbox.Height*2, 400, 400)};
         stealAtt = new bool[2]{false, false};
         stealTime = new float[2];
+        pause = false;
+        pauseTime = new float[2];
 
         // TODO: use this.Content to load your game content here
     }
@@ -91,6 +96,18 @@ public class Game1 : Game
 
 
         // TODO: Add your update logic here
+        if (pauseTime[0] + 1.5f >= gameTime.TotalGameTime.Seconds){
+            pause = true;
+            pauseTime[1] = gameTime.TotalGameTime.Seconds;
+        }
+
+        if (pause){
+            if (pauseTime[1] + 10f <= gameTime.TotalGameTime.Seconds){
+                pause = false;
+            } else {
+                return;
+            }
+        }
 
         player1.Update(gameTime);
         player2.Update(gameTime);
@@ -120,14 +137,15 @@ public class Game1 : Game
 
         if(player1.HasBall){
             lastToHaveBall = player1;
-        } else{
+        }
+        if (player2.HasBall){
             lastToHaveBall = player2;
         }
 
-        if(gameTime.TotalGameTime.Seconds >= stealTime[0] + 10f){
+        if(gameTime.TotalGameTime.Seconds >= stealTime[0] + 5f){
             stealAtt[0] = false;
         }
-        if(gameTime.TotalGameTime.Seconds >= stealTime[1] + 10f){
+        if(gameTime.TotalGameTime.Seconds >= stealTime[1] + 5f){
             stealAtt[1] = false;
         }
 
@@ -187,6 +205,7 @@ public class Game1 : Game
             what = "Dunk!";
             where = hoopLeft.Position - new Vector2(-30, 100);
             howLong = gameTime.TotalGameTime.Seconds;
+            Reset(gameTime);
         }
 
         //right dunk
@@ -204,6 +223,7 @@ public class Game1 : Game
             what = "Dunk!";
             where = hoopRight.Position - new Vector2(30, 100);
             howLong = gameTime.TotalGameTime.Seconds;
+            Reset(gameTime);
         }
     }
 
@@ -220,6 +240,8 @@ public class Game1 : Game
             {
             player1.ShootB = false;
             player2.ShootB = false;
+            player1.HasBall = lastToHaveBall == player1 ? false : true;
+            player2.HasBall = lastToHaveBall == player2 ? false : true;
             shootHit[0] = true;
             shootHitTime[0] = gameTime.TotalGameTime.Seconds;
             where = hoopLeft.Position - new Vector2(-30, 100);
@@ -227,6 +249,7 @@ public class Game1 : Game
             howLong = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(0,fromThree ? 3 : 2, gameTime);
             fromThree = false;
+            Reset(gameTime);
         }
         
         //right hoop
@@ -248,6 +271,7 @@ public class Game1 : Game
             howLong = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(fromThree ? 3 : 2, 0, gameTime);
             fromThree = false;
+            Reset(gameTime);
         }
     }
 
@@ -296,5 +320,16 @@ public class Game1 : Game
             player1.ShootB = false;
             player2.ShootB = false;
         }
+    }
+
+    public void Reset(GameTime gameTime){
+        player1.Reset(gameTime);
+        player2.Reset(gameTime);
+        pauseTime[0] = gameTime.TotalGameTime.Seconds;
+    }
+
+    public void Pause(GameTime gameTime){
+        pause = true;
+        pauseTime[1] = gameTime.TotalGameTime.Seconds;
     }
 }
