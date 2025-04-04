@@ -4158,19 +4158,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tosi07001\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Github\\MG4G\\MG4G.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\MG4G.csproj",
       "projectName": "MG4G",
-      "projectPath": "C:\\Github\\MG4G\\MG4G.csproj",
-      "packagesPath": "C:\\Users\\tosi07001\\.nuget\\packages\\",
-      "outputPath": "C:\\Github\\MG4G\\obj\\",
+      "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\MG4G.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\MG4G\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tosi07001\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4229,7 +4229,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.407/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

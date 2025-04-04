@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -29,6 +30,7 @@ namespace MG4G
         private Vector2 shootStrength = new Vector2(6f, -25f);
         private bool isGrounded;
         private float groundY = 1080 - 350;
+        private float speed = 5f;
 
         // Ball
         private Ball ball;
@@ -67,12 +69,12 @@ namespace MG4G
 
             // Move Left
             if (newState.IsKeyDown(left) && position.X >= 0 && isGrounded){
-                velocity.X = -4;
+                velocity.X = -speed;
             }
 
             // Move Right
             if (newState.IsKeyDown(right) && position.X <= 1920 - hitbox.Width && isGrounded){
-                velocity.X = 4;
+                velocity.X = speed;
             }
 
             // Stop Movement if both keys are pressed or released
@@ -152,6 +154,12 @@ namespace MG4G
         }
 
         public void Update(GameTime gameTime){
+
+            if(hasBall)
+                speed = 4;
+            else
+                speed = 5;
+            
             newState = Keyboard.GetState();
             Move(gameTime);
             ApplyPhysics(gameTime);

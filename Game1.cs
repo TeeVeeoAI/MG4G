@@ -45,7 +45,8 @@ public class Game1 : Game
         IsMouseVisible = true;
         _graphics.PreferredBackBufferHeight = 1080;
         _graphics.PreferredBackBufferWidth = 1920;
-        //_graphics.IsFullScreen = false;
+        //_graphics.IsFullScreen = true; 
+        //_graphics.ApplyChanges(); 
     }
 
     protected override void Initialize()
@@ -130,7 +131,7 @@ public class Game1 : Game
             player2.ShootB = true;
         }
 
-        if(gameTime.TotalGameTime.Seconds >= lastShoot+3.5f){
+        if(gameTime.TotalGameTime.Seconds >= lastShoot+4f){
             player2.ShootB = false;
             player1.ShootB = false;
         }
@@ -142,10 +143,10 @@ public class Game1 : Game
             lastToHaveBall = player2;
         }
 
-        if(gameTime.TotalGameTime.Seconds >= stealTime[0] + 5f){
+        if(gameTime.TotalGameTime.Seconds >= stealTime[0] + 2.5f){
             stealAtt[0] = false;
         }
-        if(gameTime.TotalGameTime.Seconds >= stealTime[1] + 5f){
+        if(gameTime.TotalGameTime.Seconds >= stealTime[1] + 2.5f){
             stealAtt[1] = false;
         }
 
@@ -156,7 +157,7 @@ public class Game1 : Game
         }
 
         for(int i = 0; i < 2; i++){
-            if(gameTime.TotalGameTime.Seconds >= shootHitTime[i] + 3f){
+            if(gameTime.TotalGameTime.Seconds >= shootHitTime[i] + 1.65f){
                 shootHit[i] = false;
             }
         }
@@ -233,7 +234,7 @@ public class Game1 : Game
         if( ball.Hitbox.Intersects(hoopLeft.Hitbox) && 
             ball.Position.X >= 20 && ball.Position.X <= 130 && 
             !shootHit[0] && 
-            ball.Position.Y > hoopLeft.Position.Y && 
+            ball.Position.Y < hoopLeft.Position.Y+40 && 
             ball.Velocity.Y > 0 && 
             ball.WhoHasTheBall(gameTime) != player1 && 
             ball.WhoHasTheBall(gameTime) != player2)
@@ -257,7 +258,7 @@ public class Game1 : Game
             ball.Position.X <= 1980-20-50 && 
             ball.Position.X >= 1980-130-50 && 
             !shootHit[1] && 
-            ball.Position.Y > hoopRight.Position.Y && 
+            ball.Position.Y < hoopRight.Position.Y+40 && 
             ball.Velocity.Y > 0 && 
             ball.WhoHasTheBall(gameTime) != player1 && 
             ball.WhoHasTheBall(gameTime) != player2)
@@ -303,7 +304,7 @@ public class Game1 : Game
         if(player1.Steal(gameTime) && !stealAtt[0]){
             stealAtt[0] = true;
             stealTime[0] = gameTime.TotalGameTime.Seconds;
-            if (player1.Hitbox.Intersects(player2.Hitbox) && player2.HasBall){
+            if (player1.Hitbox.Intersects(player2.Hitbox) && player2.HasBall && new Random().Next(4) == 3){
                 player1.HasBall = true;
                 player2.HasBall = false;
             }
@@ -313,7 +314,7 @@ public class Game1 : Game
         if(player2.Steal(gameTime) && !stealAtt[1]){
             stealAtt[1] = true;
             stealTime[1] = gameTime.TotalGameTime.Seconds;
-            if (player2.Hitbox.Intersects(player1.Hitbox) && player1.HasBall){
+            if (player2.Hitbox.Intersects(player1.Hitbox) && player1.HasBall && new Random().Next(4) == 3){
                 player2.HasBall = true;
                 player1.HasBall = false;
             }
