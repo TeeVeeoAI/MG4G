@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MG4G")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+572efb6f6444b0f425f7b1d89d437f124eb54b91")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e267f5d2600989fb5bb8929ea6607d9e2fccc7e0")]
 [assembly: System.Reflection.AssemblyProductAttribute("MG4G")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MG4G")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
