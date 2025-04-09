@@ -171,3 +171,5 @@ C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\goat_real.
 C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\player.xnb
 C:\Github\MG4G\bin\Debug\net8.0-windows\Content\goat_real.xnb
 C:\Github\MG4G\bin\Debug\net8.0-windows\Content\player.xnb
+C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\LeMusic.wma
+C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\LeMusic.xnb

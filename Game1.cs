@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using SharpDX.MediaFoundation;
 
 namespace MG4G;
 
@@ -66,6 +64,7 @@ public class Game1 : Game
         hoopTextureLeft = Content.Load<Texture2D>("hoopLeft");
         font = Content.Load<SpriteFont>("File");
         pixel = Content.Load<Texture2D>("pixel");
+        lebron = Content.Load<Song>("LeMusic");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
         player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, Keys.V, ball);
@@ -77,13 +76,16 @@ public class Game1 : Game
         score = new Score(new Vector2(1920/2-50, 0), font);
         threePLineLeft = new Rectangle((int)hoopLeft.Position.X+700+hoopLeft.Hitbox.Width, 1080-100, 10, 100);
         threePLineRight = new Rectangle((int)hoopRight.Position.X-700, 1080-100, 10, 100);
-        shootHit = new bool[2]{false, false};
+        shootHit = [false, false];
         shootHitTime = new float[2];
-        gTending = new Rectangle[2]{new Rectangle((int)hoopLeft.Position.X, (int)hoopLeft.Position.Y - hoopLeft.Hitbox.Height*2, 400, 400), new Rectangle((int)hoopRight.Position.X-250, (int)hoopRight.Position.Y - hoopRight.Hitbox.Height*2, 400, 400)};
-        stealAtt = new bool[2]{false, false};
+        gTending = [new Rectangle((int)hoopLeft.Position.X, (int)hoopLeft.Position.Y - hoopLeft.Hitbox.Height*2, 400, 400), 
+                    new Rectangle((int)hoopRight.Position.X-250, (int)hoopRight.Position.Y - hoopRight.Hitbox.Height*2, 400, 400)];
+        stealAtt = [false, false];
         stealTime = new float[2];
-        pause = new bool[2]{false,false};
+        pause = [false,false];
         pauseTime = new float[2];
+
+        MediaPlayer.Play(lebron);
 
         // TODO: use this.Content to load your game content here
     }
@@ -115,10 +117,10 @@ public class Game1 : Game
         ball.Update(gameTime);
 
         if (player1.HasBall){
-            fromThree = player1.Position.X <= threePLineLeft.X ? true : false;
+            fromThree = player1.Position.X <= threePLineLeft.X;
         }
         if (player2.HasBall){
-            fromThree = player2.Position.X >= threePLineRight.X ? true : false;
+            fromThree = player2.Position.X >= threePLineRight.X;
         }
 
         if(ball.Hitbox.Intersects(player1.Hitbox) && !player1.ShootB && !player2.HasBall){
@@ -241,8 +243,8 @@ public class Game1 : Game
             {
             player1.ShootB = false;
             player2.ShootB = false;
-            player1.HasBall = lastToHaveBall == player1 ? false : true;
-            player2.HasBall = lastToHaveBall == player2 ? false : true;
+            player1.HasBall = lastToHaveBall != player1;
+            player2.HasBall = lastToHaveBall != player2;
             shootHit[0] = true;
             shootHitTime[0] = gameTime.TotalGameTime.Seconds;
             where = hoopLeft.Position - new Vector2(-30, 100);
@@ -265,6 +267,8 @@ public class Game1 : Game
             {
             player1.ShootB = false;
             player2.ShootB = false;
+            player1.HasBall = lastToHaveBall != player1;
+            player2.HasBall = lastToHaveBall != player2;
             shootHit[1] = true;
             shootHitTime[1] = gameTime.TotalGameTime.Seconds;
             where = hoopRight.Position - new Vector2(30+100, 100);
