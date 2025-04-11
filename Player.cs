@@ -68,6 +68,15 @@ namespace MG4G
                 velocity.X = speed;
             }
 
+            // Stop Movement if outside the court
+            if (position.X < 0){
+                velocity.X = 0;
+                position.X = 0;
+            } else if (position.X > 1920 - hitbox.Width){
+                velocity.X = 0;
+                position.X = 1920 - hitbox.Width;
+            }
+
             // Stop Movement if both keys are pressed or released
             if (newState.IsKeyDown(left) && newState.IsKeyDown(right) && isGrounded || 
                 newState.IsKeyUp(left) && oldState.IsKeyDown(left) && isGrounded ||
@@ -102,11 +111,6 @@ namespace MG4G
             if (!isGrounded)
             {
                 velocity.Y += gravity;
-                if (position.X >= 1920 - hitbox.Width ||
-                    position.X <= 0 )
-                {
-                    velocity.X = 0;
-                }
             }
 
             position += velocity;

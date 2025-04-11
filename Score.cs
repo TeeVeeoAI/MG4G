@@ -5,8 +5,7 @@ namespace MG4G
 {
     public class Score
     {
-        private int leftScore;
-        private int rightScore;
+        private int leftScore, rightScore;
         private Vector2 position;
         private SpriteFont font;
 

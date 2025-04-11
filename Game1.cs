@@ -26,6 +26,7 @@ public class Game1 : Game
     private bool[] shootHit, stealAtt, pause;
     private float[] shootHitTime, stealTime, pauseTime;
     private Rectangle[] gTending;
+    private KeyboardState kState;
 
     public Game1()
     {
@@ -58,8 +59,8 @@ public class Game1 : Game
         lebron = Content.Load<Song>("LeMusic");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
-        player1 = new Player(playerTexture, new Vector2((1920/2)/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, Keys.V, ball);
-        player2 = new Player(playerTexture, new Vector2((1920/2)/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.PageDown, Keys.PageUp, Keys.Down, ball);
+        player1 = new Player(playerTexture, new Vector2(1920/2/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, Keys.V, ball);
+        player2 = new Player(playerTexture, new Vector2(1920/2/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.PageDown, Keys.PageUp, Keys.Down, ball);
         ball.Player1 = player1;
         ball.Player2 = player2; 
         hoopLeft = new Hoop(hoopTextureLeft, new Vector2(0, 1080 - 150/*hoop height/width*/ - 400/*the hoop height*/));
@@ -83,20 +84,26 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)){
+
+        kState = Keyboard.GetState();
+        
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || kState.IsKeyDown(Keys.Escape)){
             Exit();
         }
 
-
+        if (kState.IsKeyDown(Keys.P)){
+            _graphics.ToggleFullScreen();
+            _graphics.ApplyChanges();
+        }
 
         // TODO: Add your update logic here
-        if (pauseTime[0] + .5f <= gameTime.TotalGameTime.Seconds && pause[0]){
+        if (pauseTime[0] + .25f <= gameTime.TotalGameTime.Seconds && pause[0]){
             Pause(gameTime);
             pause[0] = false;
         }
 
         if (pause[1]){
-            if (pauseTime[1] + 1f <= gameTime.TotalGameTime.Seconds){
+            if (pauseTime[1] + .05f <= gameTime.TotalGameTime.Seconds){
                 pause[1] = false;
             } else {
                 return;
