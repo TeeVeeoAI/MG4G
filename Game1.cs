@@ -10,31 +10,22 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private Texture2D playerTexture;
-    private Player player1, player2;
-    private Texture2D ballTexture;
-    private Texture2D pixel;
+    private Texture2D playerTexture, ballTexture, pixel;
+    private Player player1, player2, lastToHaveBall;
     private Ball ball;
     private Texture2D hoopTextureRight, hoopTextureLeft;
     private Hoop hoopLeft, hoopRight;
     private SpriteFont font;
-    private float lastShoot;
+    private float lastShoot, howLong;
     private Score score;
-    private Player lastToHaveBall;
     private Song lebron;
     private string what;
     private Vector2 where;
-    private float howLong;
-    private Rectangle threePLineLeft;
-    private Rectangle threePLineRight;
+    private Rectangle threePLineLeft, threePLineRight;
     private bool fromThree;
-    private bool[] shootHit;
-    private float[] shootHitTime;
+    private bool[] shootHit, stealAtt, pause;
+    private float[] shootHitTime, stealTime, pauseTime;
     private Rectangle[] gTending;
-    private bool[] stealAtt;
-    private float[] stealTime;
-    private bool[] pause;
-    private float[] pauseTime;
 
     public Game1()
     {

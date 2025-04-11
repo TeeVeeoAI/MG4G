@@ -8,20 +8,14 @@ namespace MG4G
     {
         // Basic
         private Texture2D texture;
-        private Vector2 position;
+        private Vector2 position, velocity, startPos;
         private Rectangle hitbox;
-        private Vector2 velocity;
         private SpriteEffects spriteEffects;
 
         // Keyboard Controls
         private KeyboardState newState;
         private KeyboardState oldState;
-        private Keys left;
-        private Keys right;
-        private Keys up;
-        private Keys shootL;
-        private Keys shootR;
-        private Keys steal;
+        private Keys left, steal, shootR, shootL, up, right;
 
         // Physics
         private float gravity = 0.6f;
@@ -33,9 +27,7 @@ namespace MG4G
 
         // Ball
         private Ball ball;
-        private bool hasBall;
-        private bool shootB;
-        private Vector2 startPos;
+        private bool hasBall, shootB;
 
         public Rectangle Hitbox { get => hitbox; }
         public Vector2 Position { get => position; }

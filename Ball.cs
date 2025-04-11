@@ -6,13 +6,10 @@ namespace MG4G
     public class Ball
     {
         private Texture2D texture;
-        private Vector2 position;
+        private Vector2 position, velocity;
         private Rectangle hitbox;
-        private Vector2 velocity;
         private float rotationAngle;
-        private Player player1;
-        private Player player2;
-
+        private Player player1, player2;
         // Gravity Variables
         private float gravity = 0.6f;
         private float bounceFactor = 0.7f; // Reduces velocity on bounce
