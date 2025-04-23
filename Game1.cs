@@ -27,6 +27,7 @@ public class Game1 : Game
     private float[] shootHitTime, stealTime, pauseTime;
     private Rectangle[] gTending;
     private KeyboardState kState;
+    private PlayTime time;
 
     public Game1()
     {
@@ -76,6 +77,7 @@ public class Game1 : Game
         stealTime = new float[2];
         pause = [false,false];
         pauseTime = new float[2];
+        time = new PlayTime();
 
         MediaPlayer.Play(lebron);
 
@@ -84,6 +86,7 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
+        time.Update(gameTime);
 
         kState = Keyboard.GetState();
         
@@ -184,6 +187,7 @@ public class Game1 : Game
         player2.Draw(_spriteBatch);
         ball.Draw(_spriteBatch);
         score.DrawScore(_spriteBatch);
+        time.Draw(gameTime, _spriteBatch, font);
         _spriteBatch.DrawString(font, what != null ? what : " ", where, Color.Black);
         _spriteBatch.End();
 
