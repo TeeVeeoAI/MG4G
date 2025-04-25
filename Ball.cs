@@ -91,7 +91,6 @@ namespace MG4G
         }
 
         public void Update(GameTime gameTime){
-            SpinTheBall(gameTime);
             Move(gameTime);
             ApplyPhysics(gameTime);
         }

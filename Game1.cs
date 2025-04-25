@@ -87,6 +87,7 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         time.Update(gameTime);
+        ball.SpinTheBall(gameTime);
 
         kState = Keyboard.GetState();
         
@@ -97,6 +98,10 @@ public class Game1 : Game
         if (kState.IsKeyDown(Keys.P)){
             _graphics.ToggleFullScreen();
             _graphics.ApplyChanges();
+        }
+
+        if (time.GameOver){
+            return;
         }
 
         // TODO: Add your update logic here
@@ -111,6 +116,14 @@ public class Game1 : Game
             } else {
                 return;
             }
+        }
+
+        if (time.HalfTime){
+            player1.Reset(gameTime);
+            player2.Reset(gameTime);
+            player1.HasBall = lastToHaveBall == player1;
+            player2.HasBall = lastToHaveBall == player2;
+            return;
         }
 
         player1.Update(gameTime);
