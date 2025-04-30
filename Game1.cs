@@ -28,6 +28,8 @@ public class Game1 : Game
     private Rectangle[] gTending;
     private KeyboardState kState;
     private PlayTime time;
+    private Vector2 v2HT;
+    private string dOrH;
 
     public Game1()
     {
@@ -78,6 +80,8 @@ public class Game1 : Game
         pause = [false,false];
         pauseTime = new float[2];
         time = new PlayTime();
+        v2HT = new Vector2(1920, 1080);
+        dOrH = "";
 
         MediaPlayer.Play(lebron);
 
@@ -101,6 +105,8 @@ public class Game1 : Game
         }
 
         if (time.GameOver){
+            v2HT = new Vector2(_graphics.PreferredBackBufferWidth/2-100, _graphics.PreferredBackBufferHeight/2);
+            dOrH = "GameOver";
             return;
         }
 
@@ -123,8 +129,13 @@ public class Game1 : Game
             player2.Reset(gameTime);
             player1.HasBall = lastToHaveBall == player1;
             player2.HasBall = lastToHaveBall == player2;
+            v2HT = new Vector2(_graphics.PreferredBackBufferWidth/2-100, _graphics.PreferredBackBufferHeight/2);
+            time.V2HT = new Vector2(_graphics.PreferredBackBufferWidth/2-40, _graphics.PreferredBackBufferHeight/2+50);
+            dOrH = "HalfTime:";
             return;
         }
+        v2HT = new Vector2(1920, 1080);
+        time.V2HT = v2HT;
 
         player1.Update(gameTime);
         player2.Update(gameTime);
@@ -202,6 +213,7 @@ public class Game1 : Game
         score.DrawScore(_spriteBatch);
         time.Draw(gameTime, _spriteBatch, font);
         _spriteBatch.DrawString(font, what != null ? what : " ", where, Color.Black);
+        _spriteBatch.DrawString(font, dOrH, v2HT, Color.Black);
         _spriteBatch.End();
 
         base.Draw(gameTime);

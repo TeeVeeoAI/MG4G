@@ -8,22 +8,15 @@ namespace MG4G
 {
     public class PlayTime
     {
-        private float quarterTimeM;
-        private float quarterTimeS;
-        private float fullTimeM;
-        private float fullTimeS;
+        private float quarterTimeM, fullTimeM, currTimeM, timeTillNQM;
+        private float quarterTimeS, fullTimeS,currTimeS, timeTillNQS, halfTimeS;
         private int currQuar;
-        private float currTimeM;
-        private float currTimeS;
-        private float timeTillNQS;
-        private float timeTillNQM;
-        private bool halfTime;
-        private float halfTimeS;
-        private bool hasHT;
-        private bool gameOver;
+        private bool halfTime, hasHT, gameOver;
+        private Vector2 v2HT;
 
         public bool HalfTime{ get => halfTime; }
         public bool GameOver{ get => gameOver; }
+        public Vector2 V2HT{ set => v2HT = value; }
 
         public PlayTime(){
             fullTimeM = 4;
@@ -38,6 +31,7 @@ namespace MG4G
             halfTime = false;
             hasHT = false;
             gameOver = false;
+            v2HT = new Vector2(1920, 1080);
         }
 
         public void Update(GameTime gameTime){
@@ -66,6 +60,7 @@ namespace MG4G
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, SpriteFont font){
             spriteBatch.DrawString(font, "Q" + currQuar.ToString(), new Vector2(0, 0), Color.Black);
             spriteBatch.DrawString(font, timeTillNQM.ToString() + ":" + timeTillNQS.ToString(), new Vector2(0, 50), Color.Black);
+            spriteBatch.DrawString(font, ((halfTimeS+15) - gameTime.TotalGameTime.Seconds).ToString(), v2HT, Color.Black);
         }
 
         public void NextQ(GameTime gameTime){
