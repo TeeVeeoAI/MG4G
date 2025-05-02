@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MG4G;
 
@@ -19,6 +20,7 @@ public class Game1 : Game
     private float lastShoot, howLong;
     private Score score;
     private Song lebron;
+    private SoundEffect crowd, shotORdunk;
     private string what;
     private Vector2 where;
     private Rectangle threePLineLeft, threePLineRight;
@@ -60,6 +62,8 @@ public class Game1 : Game
         font = Content.Load<SpriteFont>("File");
         pixel = Content.Load<Texture2D>("pixel");
         lebron = Content.Load<Song>("LeMusic");
+        crowd = Content.Load<SoundEffect>("fans-at-basketball-game-crowd-5859");
+        shotORdunk = Content.Load<SoundEffect>("madeshootreal");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
         player1 = new Player(playerTexture, new Vector2(1920/2/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, Keys.V, ball);
@@ -84,6 +88,9 @@ public class Game1 : Game
         dOrH = "";
 
         MediaPlayer.Play(lebron);
+        MediaPlayer.Volume = 0.1f;
+        MediaPlayer.IsRepeating = true;
+        crowd.Play(0.1f, 0, 0);
 
         // TODO: use this.Content to load your game content here
     }
@@ -106,7 +113,8 @@ public class Game1 : Game
 
         if (time.GameOver){
             v2HT = new Vector2(_graphics.PreferredBackBufferWidth/2-100, _graphics.PreferredBackBufferHeight/2);
-            dOrH = "GameOver";
+            dOrH = "GameOver\nWinner: " + ((score.LeftScore > score.RightScore) ? "player1" : "player2");
+
             return;
         }
 
@@ -235,6 +243,7 @@ public class Game1 : Game
             what = "Dunk!";
             where = hoopLeft.Position - new Vector2(-30, 100);
             howLong = gameTime.TotalGameTime.Seconds;
+            shotORdunk.Play();
             Reset(gameTime);
         }
 
@@ -253,6 +262,7 @@ public class Game1 : Game
             what = "Dunk!";
             where = hoopRight.Position - new Vector2(30, 100);
             howLong = gameTime.TotalGameTime.Seconds;
+            shotORdunk.Play();
             Reset(gameTime);
         }
     }
@@ -279,6 +289,7 @@ public class Game1 : Game
             howLong = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(0,fromThree ? 3 : 2, gameTime);
             fromThree = false;
+            shotORdunk.Play();
             Reset(gameTime);
         }
         
@@ -303,6 +314,7 @@ public class Game1 : Game
             howLong = gameTime.TotalGameTime.Seconds;
             score.UpdateScore(fromThree ? 3 : 2, 0, gameTime);
             fromThree = false;
+            shotORdunk.Play();
             Reset(gameTime);
         }
     }
