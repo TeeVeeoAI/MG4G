@@ -180,10 +180,10 @@ public class Game1 : Game
             lastToHaveBall = player2;
         }
 
-        if(gameTime.TotalGameTime.Seconds >= stealTime[0] + 2.5f){
+        if(gameTime.TotalGameTime.Seconds >= stealTime[0] + 1f){
             stealAtt[0] = false;
         }
-        if(gameTime.TotalGameTime.Seconds >= stealTime[1] + 2.5f){
+        if(gameTime.TotalGameTime.Seconds >= stealTime[1] + 1f){
             stealAtt[1] = false;
         }
 
