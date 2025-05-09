@@ -68,7 +68,7 @@ public class Game1 : Game
         shotORdunk = Content.Load<SoundEffect>("madeshootreal");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
-        player1 = new Player(playerTexture, new Vector2(1920/2/2-100, 1080-350), Keys.A, Keys.D, Keys.Space, Keys.E, Keys.Q, Keys.V, ball);
+        player1 = new Player(playerTexture, new Vector2(1920/2/2-100, 1080-350), Keys.A, Keys.D, Keys.W, Keys.E, Keys.Q, Keys.S, ball);
         player2 = new Player(playerTexture, new Vector2(1920/2/2+1920/2-100, 1080-350), Keys.Left, Keys.Right, Keys.Up, Keys.PageDown, Keys.PageUp, Keys.Down, ball);
         ball.Player1 = player1;
         ball.Player2 = player2; 

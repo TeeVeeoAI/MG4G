@@ -180,3 +180,8 @@ C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\basketball
 C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\fans-at-basketball-game-crowd-5859.wma
 C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\fans-at-basketball-game-crowd-5859.xnb
 C:\Users\Admin\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\madeshootreal.xnb
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\basketball-net-swish-sound-40170.wma
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\fans-at-basketball-game-crowd-5859.wma
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\basketball-net-swish-sound-40170.xnb
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\fans-at-basketball-game-crowd-5859.xnb
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\madeshootreal.xnb
