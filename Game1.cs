@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
+using System.Security.Cryptography;
 
 namespace MG4G;
 
@@ -20,7 +21,7 @@ public class Game1 : Game
     private float lastShoot, howLong;
     private Score score;
     private Song lebron;
-    private SoundEffect crowd, shotORdunk, thatsToEasy, swingAndAMiss;
+    private SoundEffect crowd, shotORdunk, thatsToEasy, swingAndAMiss, leCry;
     private string what;
     private Vector2 where;
     private Rectangle threePLineLeft, threePLineRight;
@@ -68,6 +69,7 @@ public class Game1 : Game
         shotORdunk = Content.Load<SoundEffect>("madeshootreal");
         thatsToEasy = Content.Load<SoundEffect>("lebron-james-thats-to-easy");
         swingAndAMiss = Content.Load<SoundEffect>("family-guy-esoteric-mp3cut");
+        leCry = Content.Load<SoundEffect>("cry");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
         player1 = new Player(playerTexture, new Vector2(1920/2/2-100, 1080-350), Keys.A, Keys.D, Keys.W, Keys.E, Keys.Q, Keys.S, ball);
@@ -250,6 +252,7 @@ public class Game1 : Game
             where = hoopLeft.Position - new Vector2(-30, 100);
             howLong = gameTime.TotalGameTime.Seconds;
             shotORdunk.Play();
+            thatsToEasy.Play();
             Reset(gameTime);
         }
 
@@ -269,6 +272,7 @@ public class Game1 : Game
             where = hoopRight.Position - new Vector2(30, 100);
             howLong = gameTime.TotalGameTime.Seconds;
             shotORdunk.Play();
+            thatsToEasy.Play();
             Reset(gameTime);
         }
     }
@@ -285,7 +289,7 @@ public class Game1 : Game
             ball.WhoHasTheBall(gameTime) != player2)
             {
             if (fromThree){
-                thatsToEasy.Play();
+                leCry.Play();
             }
             player1.ShootB = false;
             player2.ShootB = false;
@@ -314,7 +318,7 @@ public class Game1 : Game
             ball.WhoHasTheBall(gameTime) != player2)
             {
             if (fromThree){
-                thatsToEasy.Play();
+                leCry.Play();
             }
             player1.ShootB = false;
             player2.ShootB = false;
@@ -364,6 +368,9 @@ public class Game1 : Game
                 player1.HasBall = true;
                 player2.HasBall = false;
             }
+            if (!player1.HasBall){
+                swingAndAMiss.Play();
+            }
             player1.ShootB = false;
             player2.ShootB = false;
         }
@@ -373,6 +380,9 @@ public class Game1 : Game
             if (player2.Hitbox.Intersects(player1.Hitbox) && player1.HasBall && new Random().Next(4) == 3){
                 player2.HasBall = true;
                 player1.HasBall = false;
+            }
+            if (!player2.HasBall){
+                swingAndAMiss.Play();
             }
             player1.ShootB = false;
             player2.ShootB = false;

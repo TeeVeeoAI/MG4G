@@ -186,3 +186,16 @@ C:\Github\MG4G\bin\Debug\net8.0-windows\Content\basketball-net-swish-sound-40170
 C:\Github\MG4G\bin\Debug\net8.0-windows\Content\fans-at-basketball-game-crowd-5859.xnb
 C:\Github\MG4G\bin\Debug\net8.0-windows\Content\madeshootreal.xnb
 C:\Github\MG4G\bin\Debug\net8.0-windows\Content\lebron-james-thats-to-easy.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\basketball-net-swish-sound-40170.wma
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\fans-at-basketball-game-crowd-5859.wma
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\basketball-net-swish-sound-40170.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\family-guy-esoteric-mp3cut.wma
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\family-guy-esoteric-mp3cut.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\fans-at-basketball-game-crowd-5859.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\goat_real.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\lebron-james-thats-to-easy.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\LeMusic.wma
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\LeMusic.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\madeshootreal.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\player.xnb
+C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\cry.xnb
