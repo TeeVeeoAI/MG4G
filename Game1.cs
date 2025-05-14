@@ -208,11 +208,12 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(new Color(150,200,175));
+        GraphicsDevice.Clear(new Color(150, 200, 175));
 
         // TODO: Add your drawing code here
 
         _spriteBatch.Begin();
+
         hoopLeft.Draw(_spriteBatch);
         hoopRight.Draw(_spriteBatch);
         _spriteBatch.Draw(pixel, threePLineLeft, Color.White);
@@ -224,6 +225,7 @@ public class Game1 : Game
         time.Draw(gameTime, _spriteBatch, font);
         _spriteBatch.DrawString(font, what != null ? what : " ", where, Color.Black);
         _spriteBatch.DrawString(font, dOrH, v2HT, Color.Black);
+
         _spriteBatch.End();
 
         base.Draw(gameTime);
