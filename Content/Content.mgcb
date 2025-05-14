@@ -19,6 +19,12 @@
 /processorParam:Quality=Best
 /build:basketball-net-swish-sound-40170.mp3
 
+#begin family-guy-esoteric-mp3cut.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:family-guy-esoteric-mp3cut.mp3
+
 #begin fans-at-basketball-game-crowd-5859.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -103,6 +109,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images.png
+
+#begin lebron-james-thats-to-easy.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:lebron-james-thats-to-easy.mp3
 
 #begin LeMusic.mp3
 /importer:Mp3Importer

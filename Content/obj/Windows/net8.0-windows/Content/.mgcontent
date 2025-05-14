@@ -4,21 +4,23 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/basketball-net-swish-sound-40170.mp3</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/fans-at-basketball-game-crowd-5859.mp3</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/File.spritefont</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/goat_real.png</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/goat.png</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/hoopLeft.png</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/hoopRight.png</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/hoppRight.png</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/images.png</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/LeMusic.mp3</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/madeshootreal.mp3</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/pixel.png</File>
-    <File>C:/Users/Admin/Documents/GitHub/MG4G/Content/player.png</File>
+    <File>C:/Github/MG4G/Content/basketball-net-swish-sound-40170.mp3</File>
+    <File>C:/Github/MG4G/Content/fans-at-basketball-game-crowd-5859.mp3</File>
+    <File>C:/Github/MG4G/Content/File.spritefont</File>
+    <File>C:/Github/MG4G/Content/goat_real.png</File>
+    <File>C:/Github/MG4G/Content/goat.png</File>
+    <File>C:/Github/MG4G/Content/hoopLeft.png</File>
+    <File>C:/Github/MG4G/Content/hoopRight.png</File>
+    <File>C:/Github/MG4G/Content/hoppRight.png</File>
+    <File>C:/Github/MG4G/Content/images.png</File>
+    <File>C:/Github/MG4G/Content/lebron-james-thats-to-easy.mp3</File>
+    <File>C:/Github/MG4G/Content/LeMusic.mp3</File>
+    <File>C:/Github/MG4G/Content/madeshootreal.mp3</File>
+    <File>C:/Github/MG4G/Content/pixel.png</File>
+    <File>C:/Github/MG4G/Content/player.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

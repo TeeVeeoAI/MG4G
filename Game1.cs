@@ -20,7 +20,7 @@ public class Game1 : Game
     private float lastShoot, howLong;
     private Score score;
     private Song lebron;
-    private SoundEffect crowd, shotORdunk;
+    private SoundEffect crowd, shotORdunk, thatsToEasy, swingAndAMiss;
     private string what;
     private Vector2 where;
     private Rectangle threePLineLeft, threePLineRight;
@@ -66,6 +66,8 @@ public class Game1 : Game
         lebron = Content.Load<Song>("LeMusic");
         crowd = Content.Load<SoundEffect>("fans-at-basketball-game-crowd-5859");
         shotORdunk = Content.Load<SoundEffect>("madeshootreal");
+        thatsToEasy = Content.Load<SoundEffect>("lebron-james-thats-to-easy");
+        swingAndAMiss = Content.Load<SoundEffect>("family-guy-esoteric-mp3cut");
 
         ball = new Ball(ballTexture, new Vector2(1920/2-20, 1080-200-20));
         player1 = new Player(playerTexture, new Vector2(1920/2/2-100, 1080-350), Keys.A, Keys.D, Keys.W, Keys.E, Keys.Q, Keys.S, ball);
@@ -282,6 +284,9 @@ public class Game1 : Game
             ball.WhoHasTheBall(gameTime) != player1 && 
             ball.WhoHasTheBall(gameTime) != player2)
             {
+            if (fromThree){
+                thatsToEasy.Play();
+            }
             player1.ShootB = false;
             player2.ShootB = false;
             player1.HasBall = lastToHaveBall != player1;
@@ -294,6 +299,7 @@ public class Game1 : Game
             score.UpdateScore(0,fromThree ? 3 : 2, gameTime);
             fromThree = false;
             shotORdunk.Play();
+            
             Reset(gameTime);
         }
         
@@ -307,6 +313,9 @@ public class Game1 : Game
             ball.WhoHasTheBall(gameTime) != player1 && 
             ball.WhoHasTheBall(gameTime) != player2)
             {
+            if (fromThree){
+                thatsToEasy.Play();
+            }
             player1.ShootB = false;
             player2.ShootB = false;
             player1.HasBall = lastToHaveBall != player1;
