@@ -1,2 +1,17 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/tores/OneDrive/Documents/GitHub/MG4G/Content/cry.mp3","C:/Users/tores/OneDrive/Documents/GitHub/MG4G/Content/bin/Windows/Content/cry.xnb","SoundEffectProcessor","SoundEffectContent",39123,428649,0,3472879
+"C:/Github/MG4G/Content/basketball-net-swish-sound-40170.mp3","C:/Github/MG4G/Content/bin/Windows/Content/basketball-net-swish-sound-40170.xnb","SoundEffectProcessor","SoundEffectContent",120960,580713,0,6018747
+"C:/Github/MG4G/Content/cry.mp3","C:/Github/MG4G/Content/bin/Windows/Content/cry.xnb","SoundEffectProcessor","SoundEffectContent",39123,428649,0,3042026
+"C:/Github/MG4G/Content/family-guy-esoteric-mp3cut.mp3","C:/Github/MG4G/Content/bin/Windows/Content/family-guy-esoteric-mp3cut.xnb","SoundEffectProcessor","SoundEffectContent",19572,212073,0,3307406
+"C:/Github/MG4G/Content/fans-at-basketball-game-crowd-5859.mp3","C:/Github/MG4G/Content/bin/Windows/Content/fans-at-basketball-game-crowd-5859.xnb","SoundEffectProcessor","SoundEffectContent",2236800,10736745,0,9104521
+"C:/Github/MG4G/Content/File.spritefont","C:/Github/MG4G/Content/bin/Windows/Content/File.xnb","FontDescriptionProcessor","SpriteFontContent",2068,267298,0,345261
+"C:/Github/MG4G/Content/goat_real.png","C:/Github/MG4G/Content/bin/Windows/Content/goat_real.xnb","TextureProcessor","Texture2DContent",309126,4082485,0,2542757
+"C:/Github/MG4G/Content/goat.png","C:/Github/MG4G/Content/bin/Windows/Content/goat.xnb","TextureProcessor","Texture2DContent",132408,4082485,0,1845014
+"C:/Github/MG4G/Content/hoopLeft.png","C:/Github/MG4G/Content/bin/Windows/Content/hoopLeft.xnb","TextureProcessor","Texture2DContent",54131,174885,0,0307944
+"C:/Github/MG4G/Content/hoopRight.png","C:/Github/MG4G/Content/bin/Windows/Content/hoopRight.xnb","TextureProcessor","Texture2DContent",53721,174885,0,0198302
+"C:/Github/MG4G/Content/hoppRight.png","C:/Github/MG4G/Content/bin/Windows/Content/hoppRight.xnb","TextureProcessor","Texture2DContent",6839,518485,0,0345866
+"C:/Github/MG4G/Content/images.png","C:/Github/MG4G/Content/bin/Windows/Content/images.xnb","TextureProcessor","Texture2DContent",8185,202585,0,01177
+"C:/Github/MG4G/Content/lebron-james-thats-to-easy.mp3","C:/Github/MG4G/Content/bin/Windows/Content/lebron-james-thats-to-easy.xnb","SoundEffectProcessor","SoundEffectContent",138134,599333,0,2913574
+"C:/Github/MG4G/Content/LeMusic.mp3","C:/Github/MG4G/Content/bin/Windows/Content/LeMusic.xnb","SongProcessor","SongContent",30512650,125,0,7002896
+"C:/Github/MG4G/Content/madeshootreal.mp3","C:/Github/MG4G/Content/bin/Windows/Content/madeshootreal.xnb","SoundEffectProcessor","SoundEffectContent",4512,74021,0,2825874
+"C:/Github/MG4G/Content/pixel.png","C:/Github/MG4G/Content/bin/Windows/Content/pixel.xnb","TextureProcessor","Texture2DContent",119,89,0,002965
+"C:/Github/MG4G/Content/player.png","C:/Github/MG4G/Content/bin/Windows/Content/player.xnb","TextureProcessor","Texture2DContent",18943,202585,0,0250607

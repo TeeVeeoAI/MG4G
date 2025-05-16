@@ -199,3 +199,6 @@ C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\L
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\madeshootreal.xnb
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\player.xnb
 C:\Users\tores\OneDrive\Documents\GitHub\MG4G\bin\Debug\net8.0-windows\Content\cry.xnb
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\family-guy-esoteric-mp3cut.wma
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\cry.xnb
+C:\Github\MG4G\bin\Debug\net8.0-windows\Content\family-guy-esoteric-mp3cut.xnb
