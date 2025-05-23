@@ -11,6 +11,7 @@ namespace MG4G
         private Vector2 position, velocity, startPos;
         private Rectangle hitbox;
         private SpriteEffects spriteEffects;
+        private int textureIndex = 0;
 
         // Keyboard Controls
         private KeyboardState newState;
